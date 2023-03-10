@@ -1,0 +1,27 @@
+{
+  "name": "tribute-to-the-best-shop",
+  "version": "1.0.0",
+  "description": "This is not the best shopping website in the world, it is just a tribute.",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server --ignore client",
+    "develop": "concurrently \"cd server && npm run start\" \"cd client && npm start\"",
+    "install": "cd server && npm i && cd ../client && npm i",
+    "seed": "cd server && npm run seed",
+    "build": "cd client && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ggorosave/Tribute-to-the-Best-Shop.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ggorosave/Tribute-to-the-Best-Shop/issues"
+  },
+  "homepage": "https://github.com/ggorosave/Tribute-to-the-Best-Shop#readme",
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  }
+}
