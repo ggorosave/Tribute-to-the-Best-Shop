@@ -1,2 +1,2 @@
 # Tribute to the Best Shop
-A MERN stack shopping web app on which users can shop and fill their carts to their hearts desire.
+This is not the best shopping website in the world, it is just a tribute.
