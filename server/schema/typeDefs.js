@@ -33,6 +33,12 @@ const typeDefs = gql`
     type Checkout {
         session: ID
     }
+
+    type Auth {
+        token: ID
+        user: User
+    }
+
 `;
 
 module.exports = typeDefs;
