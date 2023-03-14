@@ -29,6 +29,10 @@ const typeDefs = gql`
         password: String
         orders: [Order]
     }
+
+    type Checkout {
+        session: ID
+    }
 `;
 
 module.exports = typeDefs;
