@@ -111,7 +111,7 @@ const resolvers = {
                 return order;
             }
 
-            throw new AuthenticationError('Not logged in');""
+            throw new AuthenticationError('Not logged in'); ""
         },
         updateUser: async (parent, args, context) => {
             if (context.user) {
@@ -133,10 +133,22 @@ const resolvers = {
                 { new: true }
             )
         },
-        login: async (parent, { email, password}) => {
+        login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });
 
-            if (!user)
+            if (!user) {
+                throw new AuthenticationError('Incorrect credentials');
+            }
+
+            const correctPw = await user.isCorrectPassword(password);
+
+            if (!correctPw) {
+                throw new AuthenticationError('Incorrect credentials');
+            }
+
+            const token = signToken(user);
+
+            return { token, user };
         }
     }
 };
