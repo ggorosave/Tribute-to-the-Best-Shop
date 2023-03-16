@@ -54,12 +54,17 @@ const resolvers = {
         },
         // Stripe checkout session
         checkout: async (parent, args, context) => {
+            // Grabs current url? CONSOLE LOG LATER
             const url = new URL(context.headers.referer).origin;
+            // Passes the arguments into new Order object
             const order = new Order({ products: args.products });
+            // Empty array to fill with line item objects?
             const line_items = [];
 
+            // destructures the products property from the order object
             const { products } = await order.populate('products');
 
+            // iterates through the products
             for (let i = 0; i < products.length; i++) {
                 const product = await stripe.products.create({
                     name: products[i].name,
@@ -89,6 +94,15 @@ const resolvers = {
 
             return { session: session.id };
         }
+    },
+    Mutation: {
+        addUser: async (parent, args) => {
+            const user = await User.create(args);
+            const token = signToken(user);
+
+            return { token, user };
+        },
+        
     }
 };
 
