@@ -102,7 +102,15 @@ const resolvers = {
 
             return { token, user };
         },
-        
+        addOrder: async (parent, { products }, context) => {
+            if (context.user) {
+                const order = new Order({ products })
+
+                await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
+
+                return order;
+            }
+        }
     }
 };
 
