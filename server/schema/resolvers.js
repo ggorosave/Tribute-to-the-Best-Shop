@@ -54,12 +54,17 @@ const resolvers = {
         },
         // Stripe checkout session
         checkout: async (parent, args, context) => {
+            // Grabs current url? CONSOLE LOG LATER
             const url = new URL(context.headers.referer).origin;
+            // Passes the arguments into new Order object
             const order = new Order({ products: args.products });
+            // Empty array to fill with line item objects?
             const line_items = [];
 
+            // destructures the products property from the order object
             const { products } = await order.populate('products');
 
+            // iterates through the products
             for (let i = 0; i < products.length; i++) {
                 const product = await stripe.products.create({
                     name: products[i].name,
@@ -88,6 +93,62 @@ const resolvers = {
             });
 
             return { session: session.id };
+        }
+    },
+    Mutation: {
+        addUser: async (parent, args) => {
+            const user = await User.create(args);
+            const token = signToken(user);
+
+            return { token, user };
+        },
+        addOrder: async (parent, { products }, context) => {
+            if (context.user) {
+                const order = new Order({ products })
+
+                await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
+
+                return order;
+            }
+
+            throw new AuthenticationError('Not logged in'); ""
+        },
+        updateUser: async (parent, args, context) => {
+            if (context.user) {
+                return await User.findByIdAndUpdate(
+                    context.user._id,
+                    args,
+                    { new: true }
+                );
+            }
+
+            throw new AuthenticationError('Not logged in');
+        },
+        updateProduct: async (parent, { _id, quantity }, context) => {
+            const decrement = Math.abs(quantity) * -1;
+
+            return await Product.findByIdAndUpdate(
+                _id,
+                { $inc: { quantity: decrement } },
+                { new: true }
+            )
+        },
+        login: async (parent, { email, password }) => {
+            const user = await User.findOne({ email });
+
+            if (!user) {
+                throw new AuthenticationError('Incorrect credentials');
+            }
+
+            const correctPw = await user.isCorrectPassword(password);
+
+            if (!correctPw) {
+                throw new AuthenticationError('Incorrect credentials');
+            }
+
+            const token = signToken(user);
+
+            return { token, user };
         }
     }
 };
