@@ -10,6 +10,9 @@ export const categorySlice = createSlice({
         updateCategories(state, action) {
             state.categories.push(action.payload);
         },
+        updateCurrentCategory(state, action) {
+            state.currentCategory = action.payload;
+        }
     }
 });
 
