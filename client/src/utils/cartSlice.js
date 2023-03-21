@@ -32,7 +32,10 @@ export const cartSlice = createSlice({
             state.cartOpen = newState.length > 0;
             state.cart = newState;
         },
-        
+        clearCart: (state) => {
+            state.cartOpen = false;
+            state.cart = [];
+        }
     }
 })
 
