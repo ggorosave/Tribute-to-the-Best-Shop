@@ -13,6 +13,16 @@ export const cartSlice = createSlice({
         },
         addMultipleToCart: (state, action) => {
             state.cart = [...state.cart, ...action.payload];
+        },
+        updateCartQuantity: (state, action) => {
+            state.cartOpen = true;
+            state.cart.map((product) => {
+                if (action.payload._id === product._id) {
+                    // REFACTOR?
+                    product.purchaseQuantity = action.payload.product.purchaseQuantity;
+                }
+                return product;
+            });
         }
     }
 })
