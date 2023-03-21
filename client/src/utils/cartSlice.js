@@ -10,7 +10,8 @@ export const cartSlice = createSlice({
         addToCart: (state, action) => {
             state.cartOpen = true;
             state.cart.push(action.payload);
-        }
+        },
+        
     }
 })
 

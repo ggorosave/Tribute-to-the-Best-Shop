@@ -7,10 +7,10 @@ export const categorySlice = createSlice({
         currentCategory: ''
     },
     reducers: {
-        updateCategories(state, action) {
+        updateCategories: (state, action) => {
             state.categories.push(action.payload);
         },
-        updateCurrentCategory(state, action) {
+        updateCurrentCategory: (state, action) => {
             state.currentCategory = action.payload;
         }
     }
