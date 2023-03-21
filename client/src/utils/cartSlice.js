@@ -35,6 +35,9 @@ export const cartSlice = createSlice({
         clearCart: (state) => {
             state.cartOpen = false;
             state.cart = [];
+        },
+        toggleCart: (state) => {
+            state.cartOpen = !state.cartOpen;
         }
     }
 })
