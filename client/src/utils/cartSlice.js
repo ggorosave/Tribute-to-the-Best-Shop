@@ -23,7 +23,16 @@ export const cartSlice = createSlice({
                 }
                 return product;
             });
-        }
+        },
+        removeFromCart: (state, action) => {
+            let newState = state.cart.filter((product) => {
+                return product._id !== action.payload._id
+            })
+
+            state.cartOpen = newState.length > 0;
+            state.cart = newState;
+        },
+        
     }
 })
 
