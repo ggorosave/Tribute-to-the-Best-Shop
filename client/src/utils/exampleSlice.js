@@ -2,6 +2,8 @@
 // Create a slice for each reducer: https://redux.js.org/tutorials/essentials/part-2-app-structure
 /** Slices to Create:
  * cart
+ * products
+ * category
  */
 import { createSlice } from '@reduxjs/toolkit'
 
