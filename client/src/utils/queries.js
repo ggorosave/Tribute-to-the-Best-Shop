@@ -38,3 +38,12 @@ export const QUERY_ALL_PRODUCTS = gql`
     }
   }
 `;
+
+export const QUERY_CATEGORIES = gql`
+  {
+    categories {
+      _id
+      name
+    }
+  }
+`;
