@@ -1,5 +1,8 @@
 // refactor each reducer to look like this?
 // Create a slice for each reducer: https://redux.js.org/tutorials/essentials/part-2-app-structure
+/** Slices to Create:
+ * cart
+ */
 import { createSlice } from '@reduxjs/toolkit'
 
 export const counterSlice = createSlice({

@@ -1,5 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+
+// Imports provider and store for redux 
+import { Provider } from 'react-redux';
+import store from './utils/store'
+
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -7,7 +12,10 @@ import reportWebVitals from './reportWebVitals';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    {/* Provides store to the rest of the app */}
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>
 );
 
