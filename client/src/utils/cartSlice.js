@@ -11,7 +11,9 @@ export const cartSlice = createSlice({
             state.cartOpen = true;
             state.cart.push(action.payload);
         },
-        
+        addMultipleToCart: (state, action) => {
+            state.cart = [...state.cart, ...action.payload];
+        }
     }
 })
 
