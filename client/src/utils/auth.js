@@ -1,5 +1,9 @@
 import decode from 'jwt-decode';
 
+// Learn More:
+// https://www.npmjs.com/package/jsonwebtoken
+// https://jwt.io/#debugger-io
+
 class AuthService {
   getProfile() {
     return decode(this.getToken());

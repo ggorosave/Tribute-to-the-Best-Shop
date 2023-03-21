@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 
 // Imports provider and store for redux 
 import { Provider } from 'react-redux';
-import store from './utils/store'
+import store from './utils/reducers/store'
 
 import './index.css';
 import App from './App';
