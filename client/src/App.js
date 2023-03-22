@@ -11,6 +11,25 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 // Chakra: https://chakra-ui.com/getting-started
 // React Router: https://reactrouter.com/en/main/start/tutorial
 
+const httpLink = createHttpLink({
+  uri: '/graphql',
+});
+
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem('id_token');
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  };
+});
+
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache(),
+});
+
 const App = () => {
 
   const router = createBrowserRouter([
@@ -21,7 +40,7 @@ const App = () => {
   ])
 
   return (
-    <ApolloProvider>
+    <ApolloProvider client={client}>
       <RouterProvider router={router} />
     </ApolloProvider>
   )
