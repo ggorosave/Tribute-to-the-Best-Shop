@@ -5,6 +5,7 @@ import {
   ApolloProvider,
   createHttpLink,
 } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 // TODO: Look at redux docs to refactor util files: https://redux.js.org/tutorials/quick-start
