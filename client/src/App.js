@@ -11,6 +11,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 // TODO: Look at redux docs to refactor util files: https://redux.js.org/tutorials/quick-start
 // Chakra: https://chakra-ui.com/getting-started
 // React Router: https://reactrouter.com/en/main/start/tutorial
+import Home from "./pages/Home";
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -36,7 +37,7 @@ const App = () => {
   const router = createBrowserRouter([
     { 
       path: '/',
-      element: <><h1>Hello World</h1></>,
+      element: <Home />,
     }
   ])
 
