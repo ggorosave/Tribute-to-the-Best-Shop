@@ -60,6 +60,10 @@ const theme = extendTheme({
           800: '#4c2201',
           900: '#1c0a00',
         }
+    },
+    fonts: {
+        body: "'Hind', sans-serif",
+        heading: "'Montserrat', sans-serif"
     }
 })
 

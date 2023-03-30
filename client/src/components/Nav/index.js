@@ -14,7 +14,7 @@ const Nav = () => {
 
     return (
         <Flex as='header' w='full' bg='primary.700'>
-            <Text color='gray.50'>Yes</Text>
+            
         </Flex>
     )
 
