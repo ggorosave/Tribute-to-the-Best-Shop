@@ -12,7 +12,6 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 // Chakra: https://chakra-ui.com/getting-started
 // React Router: https://reactrouter.com/en/main/start/tutorial
 import Home from "./pages/Home";
-import Nav from "./components/Nav";
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -44,7 +43,6 @@ const App = () => {
 
   return (
     <ApolloProvider client={client}>
-      <Nav />
       <RouterProvider router={router} />
     </ApolloProvider>
   )
