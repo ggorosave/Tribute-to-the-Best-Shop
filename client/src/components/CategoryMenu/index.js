@@ -3,8 +3,8 @@ import { useQuery } from "@apollo/client";
 import { useSelector, useDispatch } from "react-redux";
 import { QUERY_CATEGORIES } from "../../utils/queries";
 import { idbPromise } from "../../utils/helpers";
-import { selectCategories, updateCategories } from "../../utils/reducers/categorySlice";
-import { Box } from "@chakra-ui/react";
+import { selectCategories, updateCategories, updateCurrentCategory } from "../../utils/reducers/categorySlice";
+import { Box, Heading, Button } from "@chakra-ui/react";
 
 const CategoryMenu = () => {
 
@@ -31,9 +31,23 @@ const CategoryMenu = () => {
         }
     }, [categoryData, loading, dispatch]);
 
+    const handleClick = (id) => {
+        dispatch(updateCurrentCategory(id));
+    };
+
     return (
         <Box>
-
+            <Heading as='h2'>Choose a Category:</Heading>
+            {categories.map((item) => (
+                <Button
+                    key={item._id}
+                    onClick={() => {
+                        handleClick(item._id);
+                    }}
+                >
+                    {item.name}
+                </Button>
+            ))}
         </Box>
     )
 };
