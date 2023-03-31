@@ -6,12 +6,13 @@ import { useQuery } from "@apollo/client";
 import { QUERY_PRODUCTS } from "../../utils/queries";
 import { idbPromise } from "../../utils/helpers";
 import spinner from "../../assets/spinner.gif";
-import { 
+import {
     Box,
     Heading,
- } from "@chakra-ui/react";
+    Flex
+} from "@chakra-ui/react";
 
-// import ProductItem
+import ProductItem from "../ProductItem";
 
 const ProductList = () => {
 
@@ -20,7 +21,7 @@ const ProductList = () => {
     // Grabs products from state using a selector (Redux)
     const products = useSelector(selectProducts);
     const dispatch = useDispatch();
-    
+
     const { loading, data } = useQuery(QUERY_PRODUCTS);
 
     useEffect(() => {
@@ -38,20 +39,37 @@ const ProductList = () => {
     }, [data, loading, dispatch]);
 
     const filterProducts = () => {
-        
+
         if (!currentCategory) {
             return products;
         }
 
         return products.filter((product) => product.category._id === currentCategory);
-    }; 
+    };
 
     return (
         <Box mt={2}>
-            
+
             <Heading as="h2" fontSize='xl'>Our Products:</Heading>
 
-            {/* Add ProductItem Here */}
+            {/* Products */}
+            {products.length ? (
+                <Flex>
+                    {filterProducts().map((product) => (
+                        <ProductItem
+                            key={product._id}
+                            _id={product._id}
+                            image={product.image}
+                            name={product.name}
+                            price={product.price}
+                            quantity={product.quantity}
+                        />
+                    ))}
+                </Flex>
+            ) : (
+                <Heading as='h3' fontSize='xl'>You haven't added any products yet!</Heading>
+            )
+            }
 
         </Box>
     )
