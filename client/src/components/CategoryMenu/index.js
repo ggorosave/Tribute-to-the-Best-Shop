@@ -3,7 +3,7 @@ import { useQuery } from "@apollo/client";
 import { useSelector, useDispatch } from "react-redux";
 import { QUERY_CATEGORIES } from "../../utils/queries";
 import { idbPromise } from "../../utils/helpers";
-import { selectCategories } from "../../utils/reducers/categorySlice";
+import { selectCategories, updateCategories } from "../../utils/reducers/categorySlice";
 import { Box } from "@chakra-ui/react";
 
 const CategoryMenu = () => {
@@ -14,7 +14,22 @@ const CategoryMenu = () => {
 
     const { loading, data: categoryData } = useQuery(QUERY_CATEGORIES);
 
-    
+    useEffect(() => {
+
+        if (categoryData) {
+            
+            // Category Reducer
+            dispatch(updateCategories(categoryData.categories));
+
+            categoryData.categories.forEach((category) => {
+                idbPromise('categories', 'put', category);
+            });
+        } else if (!loading) {
+            idbPromise('categories', 'get').then((categories) => {
+                dispatch(updateCategories(categories));
+            });
+        }
+    }, [categoryData, loading, dispatch]);
 
     return (
         <Box>
