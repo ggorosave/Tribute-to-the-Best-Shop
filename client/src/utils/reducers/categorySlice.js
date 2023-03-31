@@ -18,4 +18,7 @@ export const categorySlice = createSlice({
 
 export const { updateCategories, updateCurrentCategory } = categorySlice.actions;
 
+export const selectCategories = state => state.category.categories;
+export const selectCurrentCategory = state => state.category.currentCategory;
+
 export default categorySlice.reducer;
