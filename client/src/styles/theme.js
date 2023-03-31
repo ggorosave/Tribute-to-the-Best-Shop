@@ -62,7 +62,7 @@ const theme = extendTheme({
         }
     },
     fonts: {
-        body: "'Hind', sans-serif",
+        body: "'Raleway', sans-serif",
         heading: "'Montserrat', sans-serif"
     }
 })

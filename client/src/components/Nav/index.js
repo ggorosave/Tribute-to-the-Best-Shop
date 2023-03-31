@@ -21,7 +21,7 @@ const Nav = () => {
         // Login
 
     return (
-        <Flex as='header' w='full' bg='primary.700' px={2} py={1} color='primary.100'>
+        <Flex as='header' w='full' bg='primary.700' px={4} py={2} color='primary.100'>
 
             {/* Store Heading and Homepage Link */}
             <Heading as='h1' fontSize={{ base:'2xl', md: '3xl'}} >

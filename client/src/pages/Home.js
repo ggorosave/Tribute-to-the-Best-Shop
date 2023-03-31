@@ -3,6 +3,7 @@ import { Box, Text } from "@chakra-ui/react"
 
 // Components for main page need to be loaded here
 import Nav from "../components/Nav";
+import CategoryMenu from "../components/CategoryMenu";
 
 const Home = () => {
     return(
@@ -10,10 +11,8 @@ const Home = () => {
             {/* TODO: Update Nav */}
             <Nav />
 
-            {/* Delete */}
-            <Text>Hello World</Text>
-
             {/* Category Menu */}
+            <CategoryMenu />
         </Box>
     )
 }
