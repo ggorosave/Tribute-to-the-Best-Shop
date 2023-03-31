@@ -6,7 +6,10 @@ import { useQuery } from "@apollo/client";
 import { QUERY_PRODUCTS } from "../../utils/queries";
 import { idbPromise } from "../../utils/helpers";
 import spinner from "../../assets/spinner.gif";
-import { Box } from "@chakra-ui/react";
+import { 
+    Box,
+    Heading,
+ } from "@chakra-ui/react";
 
 // import ProductItem
 
@@ -44,7 +47,11 @@ const ProductList = () => {
     }; 
 
     return (
-        <Box my={2}>
+        <Box mt={2}>
+            
+            <Heading as="h2" fontSize='xl'>Our Products:</Heading>
+
+            {/* Add ProductItem Here */}
 
         </Box>
     )

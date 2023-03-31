@@ -36,7 +36,7 @@ const CategoryMenu = () => {
     };
 
     return (
-        <Box my={2} mx={4}>
+        <Box mt={2}>
 
             {/* Heading */}
             <Heading as='h2' fontSize='xl'>Choose a Category:</Heading>
