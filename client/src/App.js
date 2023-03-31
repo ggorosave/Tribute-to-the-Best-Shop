@@ -11,6 +11,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 // TODO: Look at redux docs to refactor util files: https://redux.js.org/tutorials/quick-start
 // Chakra: https://chakra-ui.com/getting-started
 // React Router: https://reactrouter.com/en/main/start/tutorial
+import Root from "./pages/Root"
 import Home from "./pages/Home";
 
 const httpLink = createHttpLink({
@@ -37,7 +38,14 @@ const App = () => {
   const router = createBrowserRouter([
     { 
       path: '/',
-      element: <Home />,
+      element: <Root />,
+      // ADD ErrorPage
+      children: [
+        {
+          path: '/',
+          element: <Home />
+        },
+      ],
     }
   ])
 
