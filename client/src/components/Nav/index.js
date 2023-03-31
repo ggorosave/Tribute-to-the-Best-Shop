@@ -13,6 +13,13 @@ import { Link as RouteLink } from 'react-router-dom';
 
 const Nav = () => {
 
+    // Add function to render navigation based on login status 
+        // Order History
+        // Logout
+        // ------------
+        // Signup
+        // Login
+
     return (
         <Flex as='header' w='full' bg='primary.700' px={2} py={1} color='primary.100'>
 
@@ -30,6 +37,7 @@ const Nav = () => {
 
             {/* Navigation */}
             <Box as="nav">
+                {/* Add render nav function here */}
                 
             </Box>
         </Flex>

@@ -7,8 +7,13 @@ import Nav from "../components/Nav";
 const Home = () => {
     return(
         <Box>
+            {/* TODO: Update Nav */}
             <Nav />
+
+            {/* Delete */}
             <Text>Hello World</Text>
+
+            {/* Category Menu */}
         </Box>
     )
 }
