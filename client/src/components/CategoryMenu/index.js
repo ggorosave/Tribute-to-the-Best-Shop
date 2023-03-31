@@ -36,14 +36,23 @@ const CategoryMenu = () => {
     };
 
     return (
-        <Box>
-            <Heading as='h2'>Choose a Category:</Heading>
+        <Box my={2} mx={4}>
+
+            {/* Heading */}
+            <Heading as='h2' fontSize='xl'>Choose a Category:</Heading>
+
+            {/* Category Buttons */}
             {categories.map((item) => (
                 <Button
                     key={item._id}
                     onClick={() => {
                         handleClick(item._id);
                     }}
+                    colorScheme="yellow"
+                    mr={2}
+                    mt={2}
+                    borderRadius={20}
+                    size='sm'
                 >
                     {item.name}
                 </Button>
