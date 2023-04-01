@@ -10,10 +10,11 @@ const typeDefs = gql`
         _id: ID
         name: String
         description: String
+        image: String
         quantity: Int
         price: Float
         category: Category
-    }
+    } 
 
     type Order {
         _id: ID

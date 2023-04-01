@@ -1,18 +1,15 @@
 import React from "react";
 import { Box, Text } from "@chakra-ui/react"
-
-// Components for main page need to be loaded here
-import Nav from "../components/Nav";
 import CategoryMenu from "../components/CategoryMenu";
+import ProductList from "../components/ProductList";
 
 const Home = () => {
     return(
-        <Box>
-            {/* TODO: Update Nav */}
-            <Nav />
-
-            {/* Category Menu */}
+        <Box mx={4}>
+    
             <CategoryMenu />
+            <ProductList />
+            {/* Cart */}
         </Box>
     )
 }
