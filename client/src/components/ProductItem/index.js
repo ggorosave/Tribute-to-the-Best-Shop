@@ -45,7 +45,7 @@ const ProductItem = (item) => {
 
 
     return (
-        <Card>
+        <Card w='xs' mr={3} mb={3}>
             <CardBody>
 
                 {/* Route to Product */}
@@ -71,11 +71,14 @@ const ProductItem = (item) => {
                 </Link>
             </CardBody>
 
-            <Button
-                onClick={checkCartAndAdd}
-            >
-                Add to Cart
-            </Button>
+            <CardFooter>
+                <Button
+                    onClick={checkCartAndAdd}
+                >
+                    Add to Cart
+                </Button>
+            </CardFooter>
+
         </Card>
     )
 };

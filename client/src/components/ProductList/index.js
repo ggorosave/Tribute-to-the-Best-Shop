@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectProducts, updateProducts } from "../../utils/reducers/productsSlice";
 import { selectCurrentCategory } from "../../utils/reducers/categorySlice";
 import { useQuery } from "@apollo/client";
-import { QUERY_PRODUCTS } from "../../utils/queries";
+import { QUERY_PRODUCTS, QUERY_ALL_PRODUCTS } from "../../utils/queries";
 import { idbPromise } from "../../utils/helpers";
 import spinner from "../../assets/spinner.gif";
 import {
@@ -23,6 +23,8 @@ const ProductList = () => {
     const dispatch = useDispatch();
 
     const { loading, data } = useQuery(QUERY_PRODUCTS);
+
+    console.log(data);
 
     useEffect(() => {
 
@@ -47,6 +49,8 @@ const ProductList = () => {
         return products.filter((product) => product.category._id === currentCategory);
     };
 
+    console.log(filterProducts())
+
     return (
         <Box mt={2}>
 
@@ -54,7 +58,7 @@ const ProductList = () => {
 
             {/* Products */}
             {products.length ? (
-                <Flex>
+                <Flex flexWrap='wrap' justifyContent='center'>
                     {filterProducts().map((product) => (
                         <ProductItem
                             key={product._id}
