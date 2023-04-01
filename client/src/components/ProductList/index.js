@@ -24,8 +24,6 @@ const ProductList = () => {
 
     const { loading, data } = useQuery(QUERY_PRODUCTS);
 
-    console.log(data);
-
     useEffect(() => {
 
         if (data) {
@@ -58,7 +56,7 @@ const ProductList = () => {
 
             {/* Products */}
             {products.length ? (
-                <Flex flexWrap='wrap' justifyContent='center'>
+                <Flex flexWrap='wrap' justifyContent='center' mt={2}>
                     {filterProducts().map((product) => (
                         <ProductItem
                             key={product._id}

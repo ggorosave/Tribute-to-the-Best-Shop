@@ -11,7 +11,9 @@ import {
     CardBody,
     CardFooter,
     Image,
-    Text
+    Text,
+    Flex,
+    Spacer
 } from "@chakra-ui/react";
 
 const ProductItem = (item) => {
@@ -45,7 +47,7 @@ const ProductItem = (item) => {
 
 
     return (
-        <Card w='xs' mr={3} mb={3}>
+        <Card w='xs' mr={3} mb={3} borderRadius={0}>
             <CardBody>
 
                 {/* Route to Product */}
@@ -59,6 +61,10 @@ const ProductItem = (item) => {
                         alt={name}
                         src={`/images/${image}`}
                     />
+                </Link>
+
+                {/* Text Container */}
+                <Box mt={4}>
 
                     {/* Item Name */}
                     <Text fontWeight='bold'>{name}</Text>
@@ -66,17 +72,26 @@ const ProductItem = (item) => {
                     {/* Quantity in Stock */}
                     <Text>{quantity} {pluralize("item", quantity)} in stock</Text>
 
-                    {/* Price */}
-                    <Text>${price}</Text>
-                </Link>
+
+                </Box>
             </CardBody>
 
             <CardFooter>
-                <Button
-                    onClick={checkCartAndAdd}
-                >
-                    Add to Cart
-                </Button>
+
+                <Flex justifyContent='space-between' alignItems='center' w='full'>
+                    
+                    {/* Price */}
+                    <Box>
+                        <Text>${price}</Text>
+                    </Box>
+
+                    <Button
+                        onClick={checkCartAndAdd}
+                        colorScheme="yellow"
+                    >
+                        Add to Cart
+                    </Button>
+                </Flex>
             </CardFooter>
 
         </Card>
