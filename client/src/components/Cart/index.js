@@ -3,6 +3,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import { useLazyQuery } from "@apollo/client";
 import { QUERY_CHECKOUT } from "../../utils/queries";
 import { useSelector, useDispatch } from "react-redux";
+import { selectCart, toggleCart, addMultipleToCart } from "../../utils/reducers/cartSlice";
 import { idbPromise } from '../../utils/helpers';
 import { Box } from "@chakra-ui/react";
 
@@ -17,6 +18,8 @@ const Cart = () => {
     
     const dispatch = useDispatch();
     const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
+    // Grabs cart from state using a selector (Redux)
+    const cart = useSelector(selectCart)
 
     // Stripe Checkout
     useEffect(() => {
@@ -26,6 +29,22 @@ const Cart = () => {
             });
         }
     }, [data])
+
+    // If there's nothing in the cart, useEffect will call the getCart function to look in IndexDB for items and add them to the cart
+    useEffect(() => {
+        const getCart = async () => {
+            const idbCart = await idbPromise('cart', 'get');
+            dispatch(addMultipleToCart(idbCart));
+        }
+
+        if (!cart.length){
+            getCart();
+        }
+    }, [cart.length, dispatch])
+
+    const toggleCart = () => {
+        dispatch(toggleCart());
+    }
 
     return (
         <Box>
