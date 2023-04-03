@@ -11,13 +11,27 @@ import Auth from "../../utils/auth";
 // import CartItem
 // import reducers from store
 
+const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
+
 const Cart = () => {
+    
+    const dispatch = useDispatch();
+    const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
+
+    // Stripe Checkout
+    useEffect(() => {
+        if (data) {
+            stripePromise.then((res) => {
+              res.redirectToCheckout({ sessionId: data.checkout.session });
+            });
+        }
+    }, [data])
 
     return (
         <Box>
-            
+
         </Box>
     )
 };
 
-default export Cart;
+export default Cart;
