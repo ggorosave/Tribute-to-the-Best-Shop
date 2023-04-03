@@ -46,6 +46,14 @@ const Cart = () => {
         dispatch(toggleCart());
     }
 
+    const calculateTotal = () => {
+        let sum = 0;
+        cart.forEach((item) => {
+            sum += item.price * item.purchaseQuantity;
+        })
+        return sum.toFixed(2);
+    }
+
     return (
         <Box>
 
