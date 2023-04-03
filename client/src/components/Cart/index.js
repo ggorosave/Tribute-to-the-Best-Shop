@@ -18,6 +18,7 @@ const Cart = () => {
     
     const dispatch = useDispatch();
     const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
+    
     // Grabs cart from state using a selector (Redux)
     const cart = useSelector(selectCart)
 
@@ -52,6 +53,20 @@ const Cart = () => {
             sum += item.price * item.purchaseQuantity;
         })
         return sum.toFixed(2);
+    }
+
+    const submitCheckout = () => {
+        const productIds = [];
+
+        cart.forEach((item) => {
+            for (let i =0; i < item.purchaseQuantity; i++) {
+                productIds.push(item._id);
+            }
+        });
+
+        getCheckout({
+            variables: { products: productIds },
+        })
     }
 
     return (
