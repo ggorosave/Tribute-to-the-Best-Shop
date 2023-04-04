@@ -47,7 +47,6 @@ const ProductList = () => {
         return products.filter((product) => product.category._id === currentCategory);
     };
 
-    console.log(filterProducts())
 
     return (
         <Box mt={2}>
