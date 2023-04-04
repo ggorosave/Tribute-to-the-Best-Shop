@@ -14,8 +14,8 @@ import {
     DrawerOverlay,
     DrawerContent,
     DrawerCloseButton,
-    Input,
-    Button
+    Button,
+    Text
 } from "@chakra-ui/react";
 
 import Auth from "../../utils/auth";
@@ -90,17 +90,21 @@ const Cart = () => {
 
             <DrawerContent>
                 <DrawerCloseButton onClick={() => {dispatch(toggleCart())}} />
-                <DrawerHeader>Create your account</DrawerHeader>
+                <DrawerHeader>Shopping Cart</DrawerHeader>
 
                 <DrawerBody>
-                    <Input placeholder='Type here...' />
+
+                    {/* TODO: Map through cart items Go Here */}
+                    <Text>
+                        <Text as='b'></Text>
+                    </Text>
                 </DrawerBody>
 
                 <DrawerFooter>
                     <Button variant='outline' mr={3} onClick={() => {dispatch(toggleCart())}}>
                         Cancel
                     </Button>
-                    <Button colorScheme='blue'>Save</Button>
+                    <Button colorScheme='blue'>Submit</Button>
                 </DrawerFooter>
             </DrawerContent>
         </Drawer>
