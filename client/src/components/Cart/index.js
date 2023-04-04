@@ -15,7 +15,8 @@ import {
     DrawerContent,
     DrawerCloseButton,
     Button,
-    Text
+    Text,
+    Flex
 } from "@chakra-ui/react";
 
 import Auth from "../../utils/auth";
@@ -89,22 +90,40 @@ const Cart = () => {
             <DrawerOverlay />
 
             <DrawerContent>
-                <DrawerCloseButton onClick={() => {dispatch(toggleCart())}} />
+                <DrawerCloseButton onClick={() => { dispatch(toggleCart()) }} />
                 <DrawerHeader>Shopping Cart</DrawerHeader>
 
                 <DrawerBody>
 
-                    {/* TODO: Map through cart items Go Here */}
-                    <Text>
-                        <Text as='b'></Text>
-                    </Text>
+                    <Flex flexDirection='column' w='full' h='full' justifyContent='space-between'>
+
+                        {/* TODO: Map through cart items Go Here */}
+                        <Box>
+                            {
+                                cart.length <= 0 ? ( 
+                                    <Text as='i'>Cart Empty...</Text>
+                                ) : (
+                                    <Text>You have items!</Text>
+                                )
+                            }
+
+                        </Box>
+
+                        {/* Total */}
+                        <Text textAlign='end'>
+                            <Text as='b'>Total: </Text>${calculateTotal()}
+                        </Text>
+
+                    </Flex>
+
                 </DrawerBody>
 
                 <DrawerFooter>
-                    <Button variant='outline' mr={3} onClick={() => {dispatch(toggleCart())}}>
+                    {/* TODO: Add auth check to render buttons or error message */}
+                    <Button variant='outline' mr={3} onClick={() => { dispatch(toggleCart()) }}>
                         Cancel
                     </Button>
-                    <Button colorScheme='blue'>Submit</Button>
+                    <Button colorScheme='blue' onClick={{submitCheckout}}>Checkout</Button>
                 </DrawerFooter>
             </DrawerContent>
         </Drawer>
