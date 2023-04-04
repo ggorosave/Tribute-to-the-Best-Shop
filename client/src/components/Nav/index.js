@@ -8,9 +8,11 @@ import {
     UnorderedList,
     ListItem,
     Heading,
-    IconButton
+    IconButton,
+    Icon
 } from '@chakra-ui/react';
 import { FaShoppingCart } from 'react-icons/fa';
+import { GiPaperBagOpen } from "react-icons/gi";
 import { Link as RouteLink } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { selectCartOpen, toggleCart } from "../../utils/reducers/cartSlice";
@@ -38,9 +40,11 @@ const Nav = () => {
                     as={RouteLink}
                     to="/"
                 >
-                    <Box as="span" aria-label="shopping-bag" mr={2}>🛍️</Box>
-                    {/* Tribute to the Best Shop */}
-                    TTB Shop
+                    <Flex alignItems='center'>
+                        <Icon as={GiPaperBagOpen} aria-label="shopping-bag" mr={2} />
+                        {/* Tribute to the Best Shop */}
+                        TTB Shop
+                    </Flex>
                 </Link>
             </Heading>
 
@@ -48,7 +52,7 @@ const Nav = () => {
             <Box as="nav">
                 {/* Add render nav function here */}
 
-                <IconButton aria-label='Open Cart' icon={< FaShoppingCart />} colorScheme="quaternary" borderRadius='full' onClick={() => {dispatch(toggleCart())}} />
+                <IconButton aria-label='Open Cart' icon={< FaShoppingCart />} colorScheme="quaternary" borderRadius='full' onClick={() => { dispatch(toggleCart()) }} />
             </Box>
         </Flex>
     )
