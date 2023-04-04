@@ -3,9 +3,20 @@ import { loadStripe } from '@stripe/stripe-js';
 import { useLazyQuery } from "@apollo/client";
 import { QUERY_CHECKOUT } from "../../utils/queries";
 import { useSelector, useDispatch } from "react-redux";
-import { selectCart, toggleCart, addMultipleToCart } from "../../utils/reducers/cartSlice";
+import { selectCart, selectCartOpen, toggleCart, addMultipleToCart } from "../../utils/reducers/cartSlice";
 import { idbPromise } from '../../utils/helpers';
-import { Box } from "@chakra-ui/react";
+import {
+    Box,
+    Drawer,
+    DrawerBody,
+    DrawerFooter,
+    DrawerHeader,
+    DrawerOverlay,
+    DrawerContent,
+    DrawerCloseButton,
+    Input,
+    Button
+} from "@chakra-ui/react";
 
 import Auth from "../../utils/auth";
 
@@ -15,18 +26,19 @@ import Auth from "../../utils/auth";
 const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 
 const Cart = () => {
-    
+
     const dispatch = useDispatch();
     const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
-    
+
     // Grabs cart from state using a selector (Redux)
     const cart = useSelector(selectCart)
+    const cartOpen = useSelector(selectCartOpen);
 
     // Stripe Checkout
     useEffect(() => {
         if (data) {
             stripePromise.then((res) => {
-              res.redirectToCheckout({ sessionId: data.checkout.session });
+                res.redirectToCheckout({ sessionId: data.checkout.session });
             });
         }
     }, [data])
@@ -38,14 +50,11 @@ const Cart = () => {
             dispatch(addMultipleToCart(idbCart));
         }
 
-        if (!cart.length){
+        if (!cart.length) {
             getCart();
         }
     }, [cart.length, dispatch])
 
-    const toggleCart = () => {
-        dispatch(toggleCart());
-    }
 
     const calculateTotal = () => {
         let sum = 0;
@@ -59,7 +68,7 @@ const Cart = () => {
         const productIds = [];
 
         cart.forEach((item) => {
-            for (let i =0; i < item.purchaseQuantity; i++) {
+            for (let i = 0; i < item.purchaseQuantity; i++) {
                 productIds.push(item._id);
             }
         });
@@ -69,10 +78,32 @@ const Cart = () => {
         })
     }
 
-    return (
-        <Box>
+    // TODO: use Drawer or Modal for cart
 
-        </Box>
+    return (
+        <Drawer
+            placement="right"
+            isOpen={cartOpen}
+            onClose={!cartOpen}
+        >
+            <DrawerOverlay />
+
+            <DrawerContent>
+                <DrawerCloseButton onClick={() => {dispatch(toggleCart())}} />
+                <DrawerHeader>Create your account</DrawerHeader>
+
+                <DrawerBody>
+                    <Input placeholder='Type here...' />
+                </DrawerBody>
+
+                <DrawerFooter>
+                    <Button variant='outline' mr={3} onClick={() => {dispatch(toggleCart())}}>
+                        Cancel
+                    </Button>
+                    <Button colorScheme='blue'>Save</Button>
+                </DrawerFooter>
+            </DrawerContent>
+        </Drawer>
     )
 };
 
