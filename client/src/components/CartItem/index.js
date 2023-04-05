@@ -18,7 +18,7 @@ import { FaTrashAlt } from "react-icons/fa";
 const CartItem = ({ item }) => {
 
     return (
-        <Card borderRadius='none' w='full' p={2} mb={2}>
+        <Card borderRadius='none' w='90%' p={2} mb={2} mx='auto'>
             <Flex flexDirection='column'>
 
                 {/* Image */}

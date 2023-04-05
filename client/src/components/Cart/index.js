@@ -98,13 +98,28 @@ const Cart = () => {
 
                     <Flex flexDirection='column' w='full' h='full' justifyContent='space-between'>
 
-                        {/* TODO: Map through cart items Go Here */}
-                        {cart.map((item) => (
-                            <CartItem key={item._id} item={item} />
-                        ))}
-                        <Box>
+                        <Box
+                            w='full'
+                            overflowY='scroll'
+                            sx={{
+                                '&::-webkit-scrollbar': {
+                                    width: '10px',
+                                    height: '100%',
+                                    borderRadius: '8px',
+                                    backgroundColor: `primary.50`,
+                                },
+                                '&::-webkit-scrollbar-thumb': {
+                                    backgroundColor: `primary.200`,
+                                    borderRadius: '8px',
+                                },
+                            }}
+                        >
+                            {/* Map through cart items */}
+                            {cart.map((item) => (
+                                <CartItem key={item._id} item={item} />
+                            ))}
                             {
-                                cart.length <= 0 ? ( 
+                                cart.length <= 0 ? (
                                     <Text as='i'>Cart Empty...</Text>
                                 ) : (
                                     <Box />
@@ -127,7 +142,7 @@ const Cart = () => {
                     <Button variant='outline' mr={3} onClick={() => { dispatch(toggleCart()) }}>
                         Cancel
                     </Button>
-                    <Button colorScheme='blue' onClick={{submitCheckout}}>Checkout</Button>
+                    <Button colorScheme='blue' onClick={{ submitCheckout }}>Checkout</Button>
                 </DrawerFooter>
             </DrawerContent>
         </Drawer>
