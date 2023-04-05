@@ -17,6 +17,13 @@ import { FaTrashAlt } from "react-icons/fa";
 
 const CartItem = ({ item }) => {
 
+    const dispatch = useDispatch();
+
+    const removeFromCart = item => {
+        dispatch(removeFromCart(item._id))
+        idbPromise('cart', 'delete', { ...item });
+    }
+
     return (
         <Card borderRadius='none' w='90%' p={2} mb={2} mx='auto'>
             <Flex flexDirection='column'>
