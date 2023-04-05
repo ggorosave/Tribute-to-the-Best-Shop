@@ -21,7 +21,8 @@ import {
 
 import Auth from "../../utils/auth";
 
-// import CartItem
+import CartItem from "../CartItem";
+
 // import reducers from store
 
 const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
@@ -98,12 +99,15 @@ const Cart = () => {
                     <Flex flexDirection='column' w='full' h='full' justifyContent='space-between'>
 
                         {/* TODO: Map through cart items Go Here */}
+                        {cart.map((item) => (
+                            <CartItem key={item._id} item={item} />
+                        ))}
                         <Box>
                             {
                                 cart.length <= 0 ? ( 
                                     <Text as='i'>Cart Empty...</Text>
                                 ) : (
-                                    <Text>You have items!</Text>
+                                    <Box />
                                 )
                             }
 
