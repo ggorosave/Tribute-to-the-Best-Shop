@@ -81,7 +81,9 @@ const Cart = () => {
         })
     }
 
-    // TODO: use Drawer or Modal for cart
+    const openCart = () => {
+        dispatch(toggleCart())
+    }
 
     return (
         <Drawer
@@ -92,7 +94,7 @@ const Cart = () => {
             <DrawerOverlay />
 
             <DrawerContent>
-                <DrawerCloseButton onClick={() => { dispatch(toggleCart()) }} />
+                <DrawerCloseButton onClick={openCart} />
                 <DrawerHeader>Shopping Cart</DrawerHeader>
 
                 <DrawerBody>
@@ -140,7 +142,7 @@ const Cart = () => {
 
                 <DrawerFooter>
                     {/* TODO: Add auth check to render buttons or error message */}
-                    <Button variant='outline' mr={3} onClick={() => { dispatch(toggleCart()) }}>
+                    <Button variant='outline' mr={3} onClick={openCart}>
                         Cancel
                     </Button>
                     <Button colorScheme='blue' onClick={() => { submitCheckout()}}>Checkout</Button>

@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { removeFromCart, updateCartQuantity } from "../../utils/reducers/cartSlice";
+import { removeFromCart, selectCart, updateCartQuantity } from "../../utils/reducers/cartSlice";
 import { idbPromise } from "../../utils/helpers";
 import {
     Card,
@@ -66,7 +66,8 @@ const CartItem = ({ item }) => {
                         {/* Input for Quantity */}
                         <Input
                             type="number"
-                            placeholder="1"
+                            // placeholder="1"
+
                             value={item.purchaseQuantity}
                             onChange={onChange}
                             w='20%'
