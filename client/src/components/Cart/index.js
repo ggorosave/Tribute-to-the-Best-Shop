@@ -36,6 +36,7 @@ const Cart = () => {
     const cart = useSelector(selectCart)
     const cartOpen = useSelector(selectCartOpen);
 
+
     // Stripe Checkout
     useEffect(() => {
         if (data) {
@@ -86,7 +87,7 @@ const Cart = () => {
         <Drawer
             placement="right"
             isOpen={cartOpen}
-            onClose={!cartOpen}
+            onClose={cartOpen}
         >
             <DrawerOverlay />
 
@@ -142,7 +143,7 @@ const Cart = () => {
                     <Button variant='outline' mr={3} onClick={() => { dispatch(toggleCart()) }}>
                         Cancel
                     </Button>
-                    <Button colorScheme='blue' onClick={{ submitCheckout }}>Checkout</Button>
+                    <Button colorScheme='blue' onClick={() => { submitCheckout()}}>Checkout</Button>
                 </DrawerFooter>
             </DrawerContent>
         </Drawer>

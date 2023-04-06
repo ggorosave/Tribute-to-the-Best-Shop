@@ -8,14 +8,14 @@ export const cartSlice = createSlice({
     },
     reducers: {
         addToCart: (state, action) => {
-            state.cartOpen = true;
+            // state.cartOpen = true;
             state.cart.push(action.payload);
         },
         addMultipleToCart: (state, action) => {
             state.cart = [...state.cart, ...action.payload];
         },
         updateCartQuantity: (state, action) => {
-            state.cartOpen = true;
+            // state.cartOpen = true;
             state.cart.map((product) => {
                 if (action.payload._id === product._id) {
                     // REFACTOR?
@@ -29,11 +29,11 @@ export const cartSlice = createSlice({
                 return product._id !== action.payload._id
             })
 
-            state.cartOpen = newState.length > 0;
+            // state.cartOpen = newState.length > 0;
             state.cart = newState;
         },
         clearCart: (state) => {
-            state.cartOpen = false;
+            // state.cartOpen = false;
             state.cart = [];
         },
         toggleCart: (state) => {

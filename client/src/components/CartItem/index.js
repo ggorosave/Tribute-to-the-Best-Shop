@@ -19,9 +19,23 @@ const CartItem = ({ item }) => {
 
     const dispatch = useDispatch();
 
-    const removeFromCart = item => {
+    const removeCartItem = item => {
         dispatch(removeFromCart(item._id))
         idbPromise('cart', 'delete', { ...item });
+    }
+
+    const onChange = (e) => {
+        const value = e.target.value;
+        if (value === '0') {
+            dispatch(removeFromCart(item._id))
+            idbPromise('cart', 'delete', { ...item });
+        } else {
+            dispatch(updateCartQuantity({
+                _id: item._id,
+                purchaseQuantity: parseInt(value)
+            }))
+            idbPromise('cart', 'put', { ...item, purchaseQuantity: parseInt(value) });
+        }
     }
 
     return (
@@ -54,7 +68,7 @@ const CartItem = ({ item }) => {
                             type="number"
                             placeholder="1"
                             value={item.purchaseQuantity}
-                            // onChange={onChange}
+                            onChange={onChange}
                             w='20%'
                             h='30px'
                             textAlign='end'
@@ -67,6 +81,7 @@ const CartItem = ({ item }) => {
                             colorScheme="red"
                             w='20%'
                             h='30px'
+                            onClick={() => removeCartItem(item)}
                         />
                     </Flex>
                 </Box>
