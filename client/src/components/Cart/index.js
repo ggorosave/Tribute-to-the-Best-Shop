@@ -21,7 +21,8 @@ import {
 
 import Auth from "../../utils/auth";
 
-// import CartItem
+import CartItem from "../CartItem";
+
 // import reducers from store
 
 const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
@@ -34,6 +35,7 @@ const Cart = () => {
     // Grabs cart from state using a selector (Redux)
     const cart = useSelector(selectCart)
     const cartOpen = useSelector(selectCartOpen);
+
 
     // Stripe Checkout
     useEffect(() => {
@@ -79,31 +81,51 @@ const Cart = () => {
         })
     }
 
-    // TODO: use Drawer or Modal for cart
+    const openCart = () => {
+        dispatch(toggleCart())
+    }
 
     return (
         <Drawer
             placement="right"
             isOpen={cartOpen}
-            onClose={!cartOpen}
+            onClose={cartOpen}
         >
             <DrawerOverlay />
 
             <DrawerContent>
-                <DrawerCloseButton onClick={() => { dispatch(toggleCart()) }} />
+                <DrawerCloseButton onClick={openCart} />
                 <DrawerHeader>Shopping Cart</DrawerHeader>
 
                 <DrawerBody>
 
                     <Flex flexDirection='column' w='full' h='full' justifyContent='space-between'>
 
-                        {/* TODO: Map through cart items Go Here */}
-                        <Box>
+                        <Box
+                            w='full'
+                            overflowY='scroll'
+                            sx={{
+                                '&::-webkit-scrollbar': {
+                                    width: '10px',
+                                    height: '100%',
+                                    borderRadius: '8px',
+                                    backgroundColor: `primary.50`,
+                                },
+                                '&::-webkit-scrollbar-thumb': {
+                                    backgroundColor: `primary.200`,
+                                    borderRadius: '8px',
+                                },
+                            }}
+                        >
+                            {/* Map through cart items */}
+                            {cart.map((item) => (
+                                <CartItem key={item._id} item={item} />
+                            ))}
                             {
-                                cart.length <= 0 ? ( 
+                                cart.length <= 0 ? (
                                     <Text as='i'>Cart Empty...</Text>
                                 ) : (
-                                    <Text>You have items!</Text>
+                                    <Box />
                                 )
                             }
 
@@ -120,10 +142,10 @@ const Cart = () => {
 
                 <DrawerFooter>
                     {/* TODO: Add auth check to render buttons or error message */}
-                    <Button variant='outline' mr={3} onClick={() => { dispatch(toggleCart()) }}>
+                    <Button variant='outline' mr={3} onClick={openCart}>
                         Cancel
                     </Button>
-                    <Button colorScheme='blue' onClick={{submitCheckout}}>Checkout</Button>
+                    <Button colorScheme='blue' onClick={() => { submitCheckout()}}>Checkout</Button>
                 </DrawerFooter>
             </DrawerContent>
         </Drawer>

@@ -12,25 +12,37 @@ export const cartSlice = createSlice({
             state.cart.push(action.payload);
         },
         addMultipleToCart: (state, action) => {
-            state.cart = [...state.cart, ...action.payload];
+            state.cart = [...action.payload];
         },
-        updateCartQuantity: (state, action) => {
-            state.cartOpen = true;
-            state.cart.map((product) => {
-                if (action.payload._id === product._id) {
-                    // REFACTOR?
-                    product.purchaseQuantity = action.payload.product.purchaseQuantity;
+        updateCartQuantity: {
+            reducer(state, action) {
+                state.cartOpen = true;
+                let newState = state.cart.map((product) => {
+                    if (action.payload._id === product._id) {
+                        // REFACTOR?
+                        product.purchaseQuantity = action.payload.purchaseQuantity;
+                    }
+                    return product;
+                });
+
+                state.cart = [...newState];
+            },
+            prepare(_id, purchaseQuantity) {
+                return {
+                    payload: {
+                        _id,
+                        purchaseQuantity
+                    }
                 }
-                return product;
-            });
+            },
         },
         removeFromCart: (state, action) => {
             let newState = state.cart.filter((product) => {
-                return product._id !== action.payload._id
+                return product._id !== action.payload
             })
 
             state.cartOpen = newState.length > 0;
-            state.cart = newState;
+            state.cart = [...newState];
         },
         clearCart: (state) => {
             state.cartOpen = false;
