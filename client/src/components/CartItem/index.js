@@ -30,10 +30,7 @@ const CartItem = ({ item }) => {
             dispatch(removeFromCart(item._id))
             idbPromise('cart', 'delete', { ...item });
         } else {
-            dispatch(updateCartQuantity({
-                _id: item._id,
-                purchaseQuantity: parseInt(value)
-            }))
+            dispatch(updateCartQuantity(item._id, parseInt(value)))
             idbPromise('cart', 'put', { ...item, purchaseQuantity: parseInt(value) });
         }
     }
@@ -70,9 +67,10 @@ const CartItem = ({ item }) => {
 
                             value={item.purchaseQuantity}
                             onChange={onChange}
-                            w='20%'
+                            w='25%'
                             h='30px'
                             textAlign='end'
+                            fontSize='xs'
                         />
 
                         {/* Delete Button */}
