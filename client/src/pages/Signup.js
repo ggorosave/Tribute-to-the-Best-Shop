@@ -114,6 +114,11 @@ const Signup = (props) => {
                     w='full'
                     colorScheme="quaternary"
                 >Submit</Button>
+
+                {/* Link to login */}
+                <Box fontSize='sm' mt={4}>
+                    <Text>Already have an account? <Link as={RoutLink} to='/login' color='blue'>Login</Link></Text>
+                </Box>
             </FormControl>
         </Box>
     )
