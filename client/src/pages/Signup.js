@@ -38,7 +38,14 @@ const Signup = (props) => {
         Auth.login(token);
     };
 
-    
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+
+        setFormState({
+            ...formState,
+            [name]: value,
+        });
+    };
 
     return (
         <Box mx={2}>
