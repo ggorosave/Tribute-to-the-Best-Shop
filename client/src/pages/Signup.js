@@ -11,7 +11,8 @@ import {
     FormErrorMessage,
     FormHelperText,
     Input,
-    Heading
+    Heading,
+    Button
 } from '@chakra-ui/react';
 import Auth from "../utils/auth";
 
@@ -51,6 +52,7 @@ const Signup = (props) => {
         <Box mx={2}>
             <FormControl
                 as='form'
+                onSubmit={handleFormSubmit}
                 w={{ base: 'full', md: '50%', lg: '30%' }}
                 bg='white'
                 p={4}
@@ -69,15 +71,49 @@ const Signup = (props) => {
                     placeholder='First'
                     variant='flushed'
                     size='md'
+                    onChange={handleChange}
                 />
 
                 {/* Last Name */}
+                <FormLabel m={0} mt={4}>Last Name:</FormLabel>
+                <Input
+                    type="lastName"
+                    name="lastName"
+                    placeholder='Last'
+                    variant='flushed'
+                    size='md'
+                    onChange={handleChange}
+                />
 
                 {/* Email */}
+                <FormLabel m={0} mt={4}>Email:</FormLabel>
+                <Input
+                    type="email"
+                    name="email"
+                    placeholder='youremail@test.com'
+                    variant='flushed'
+                    size='md'
+                    onChange={handleChange}
+                />
 
                 {/* Password */}
+                <FormLabel m={0} mt={4}>Password:</FormLabel>
+                <Input
+                    type="password"
+                    name="password"
+                    placeholder='******'
+                    variant='flushed'
+                    size='md'
+                    onChange={handleChange}
+                />
 
                 {/* Submit Button */}
+                <Button
+                    type="submit"
+                    mt={4}
+                    w='full'
+                    colorScheme="quaternary"
+                >Submit</Button>
             </FormControl>
         </Box>
     )

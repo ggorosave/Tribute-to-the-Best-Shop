@@ -26,10 +26,8 @@ const Nav = () => {
     // Signup
     // Login
     const dispatch = useDispatch()
-    const cartOpen = useSelector(selectCartOpen);
 
-
-    console.log("Cart Open: " + cartOpen)
+    console.log("Logged In: " + Auth.loggedIn())
 
     return (
         <Flex as='header' w='full' bg='primary.700' px={4} py={2} color='primary.100' justifyContent='space-between'>
