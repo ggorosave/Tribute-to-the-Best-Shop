@@ -32,9 +32,17 @@ const Login = (props) => {
         }
     };
 
-    
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setFormState({
+            ...formState,
+            [name]: value,
+        })
+    }
+
     return (
         <Box>
+            {/* TODO add link to signup page here */}
             
         </Box>
     )
