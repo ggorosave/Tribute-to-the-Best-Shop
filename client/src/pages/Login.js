@@ -4,7 +4,8 @@ import { Link as RoutLink } from "react-router-dom";
 import { LOGIN } from "../utils/mutations";
 import {
     Link,
-    Box
+    Box,
+    Text
 } from '@chakra-ui/react';
 import Auth from "../utils/auth";
 
@@ -43,6 +44,9 @@ const Login = (props) => {
     return (
         <Box>
             {/* TODO add link to signup page here */}
+
+            {/* TODO add login form here */}
+            <Text>This is the login page</Text>
             
         </Box>
     )

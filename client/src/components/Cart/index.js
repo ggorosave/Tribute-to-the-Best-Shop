@@ -23,8 +23,6 @@ import Auth from "../../utils/auth";
 
 import CartItem from "../CartItem";
 
-// import reducers from store
-
 const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 
 const Cart = () => {

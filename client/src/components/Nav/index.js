@@ -39,6 +39,7 @@ const Nav = () => {
                 <Link
                     as={RouteLink}
                     to="/"
+                    style={{ textDecoration: 'none' }}
                 >
                     <Flex alignItems='center'>
                         <Icon as={GiPaperBagOpen} aria-label="shopping-bag" mr={2} />
@@ -49,11 +50,40 @@ const Nav = () => {
             </Heading>
 
             {/* Navigation */}
-            <Box as="nav">
+            <Flex as="nav" alignItems='center'>
                 {/* Add render nav function here */}
+                <UnorderedList display='flex' styleType='none' mr={6}>
+                    <ListItem>
+                        <Link 
+                        as={RouteLink}
+                        to='/signup'
+                        px={2}
+                        py={1}
+                        mr={2}
+                        borderRadius={18}
+                        style={{ textDecoration: 'none' }}
+                        _hover={{ fontWeight: 'semibold', backgroundColor: 'primary.600' }}
+                        >
+                            Sign Up
+                        </Link>
+                    </ListItem>
+                    <ListItem>
+                        <Link 
+                        as={RouteLink}
+                        to='/login'
+                        px={2}
+                        py={1}
+                        borderRadius={18}
+                        style={{ textDecoration: 'none' }}
+                        _hover={{ fontWeight: 'semibold', backgroundColor: 'primary.600' }}
+                        >
+                            Login
+                        </Link>
+                    </ListItem>
+                </UnorderedList>
 
                 <IconButton aria-label='Open Cart' icon={< FaShoppingCart />} colorScheme="quaternary" borderRadius='full' onClick={() => { dispatch(toggleCart()) }} />
-            </Box>
+            </Flex>
         </Flex>
     )
 
