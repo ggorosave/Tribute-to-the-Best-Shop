@@ -8,7 +8,7 @@ import Nav from "../components/Nav";
 
 const Root = () => {
     return(
-        <Box bg='quaternary.50' h='100vh'>
+        <Box bg='quaternary.50' h='full' minHeight='100vh'>
             {/* TODO: Update Nav */}
             <Nav />
 

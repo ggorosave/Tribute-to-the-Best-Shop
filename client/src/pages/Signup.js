@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { Link as RoutLink } from "react-router-dom";
-import { LOGIN } from "../utils/mutations";
+import { ADD_USER } from "../utils/mutations";
 import {
     Link,
     Box,
@@ -12,50 +12,41 @@ import {
     FormHelperText,
     Input,
     Heading,
-    Button,
-    useToast
+    Button
 } from '@chakra-ui/react';
 import Auth from "../utils/auth";
 
-const Login = (props) => {
+const Signup = (props) => {
     const [formState, setFormState] = useState({
         email: '',
-        password: ''
+        password: '',
+        firstName: '',
+        lastName: ''
     });
-    const [login, { error }] = useMutation(LOGIN);
-    const toast = useToast(); 
+    const [addUser] = useMutation(ADD_USER);
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-
-        try {
-            const mutationResponse = await login({
-                variables: {
-                    email: formState.email,
-                    password: formState.password
-                },
-            });
-            const token = mutationResponse.data.login.token;
-            Auth.login(token);
-        } catch (error) {
-            console.log(error)
-            toast({
-                title: 'Login Failed',
-                description: 'Email or Password does not match our records.',
-                status: 'error',
-                duration: 3000,
-                isClosable: true,
-            })
-        }
+        const mutationResponse = await addUser({
+            variables: {
+                email: formState.email,
+                password: formState.password,
+                firstName: formState.firstName,
+                lastName: formState.lastName,
+            },
+        });
+        const token = mutationResponse.data.addUser.token;
+        Auth.login(token);
     };
 
     const handleChange = (event) => {
         const { name, value } = event.target;
+
         setFormState({
             ...formState,
             [name]: value,
-        })
-    }
+        });
+    };
 
     return (
         <Box mx={2}>
@@ -70,7 +61,29 @@ const Login = (props) => {
                 boxShadow='sm'
             >
                 {/* Heading */}
-                <Heading as='h2' fontSize='2xl' textAlign='center'>Login</Heading>
+                <Heading as='h2' fontSize='2xl' textAlign='center'>Sign Up</Heading>
+
+                {/* First Name */}
+                <FormLabel m={0} mt={4}>First Name:</FormLabel>
+                <Input
+                    type="firstName"
+                    name="firstName"
+                    placeholder='First'
+                    variant='flushed'
+                    size='md'
+                    onChange={handleChange}
+                />
+
+                {/* Last Name */}
+                <FormLabel m={0} mt={4}>Last Name:</FormLabel>
+                <Input
+                    type="lastName"
+                    name="lastName"
+                    placeholder='Last'
+                    variant='flushed'
+                    size='md'
+                    onChange={handleChange}
+                />
 
                 {/* Email */}
                 <FormLabel m={0} mt={4}>Email:</FormLabel>
@@ -102,13 +115,13 @@ const Login = (props) => {
                     colorScheme="quaternary"
                 >Submit</Button>
 
-                {/* Link to signup */}
+                {/* Link to login */}
                 <Box fontSize='sm' mt={4}>
-                    <Text>Don't have an account yet?  <Link as={RoutLink} to='/signup' color='blue'>Sign Up</Link></Text>
+                    <Text>Already have an account? <Link as={RoutLink} to='/login' color='blue'>Login</Link></Text>
                 </Box>
             </FormControl>
         </Box>
     )
 };
 
-export default Login;
+export default Signup;

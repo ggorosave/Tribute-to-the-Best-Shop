@@ -16,14 +16,14 @@ import {
     DrawerCloseButton,
     Button,
     Text,
-    Flex
+    Flex,
+    Link
 } from "@chakra-ui/react";
+import { Link as RouteLink } from 'react-router-dom';
 
 import Auth from "../../utils/auth";
 
 import CartItem from "../CartItem";
-
-// import reducers from store
 
 const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 
@@ -118,14 +118,16 @@ const Cart = () => {
                             }}
                         >
                             {/* Map through cart items */}
-                            {cart.map((item) => (
-                                <CartItem key={item._id} item={item} />
-                            ))}
+
                             {
                                 cart.length <= 0 ? (
                                     <Text as='i'>Cart Empty...</Text>
                                 ) : (
-                                    <Box />
+                                    <Box>
+                                        {cart.map((item) => (
+                                            <CartItem key={item._id} item={item} />
+                                        ))}
+                                    </Box>
                                 )
                             }
 
@@ -142,10 +144,21 @@ const Cart = () => {
 
                 <DrawerFooter>
                     {/* TODO: Add auth check to render buttons or error message */}
-                    <Button variant='outline' mr={3} onClick={openCart}>
-                        Cancel
-                    </Button>
-                    <Button colorScheme='blue' onClick={() => { submitCheckout()}}>Checkout</Button>
+                    {Auth.loggedIn() ? (
+                        <Box>
+                            <Button variant='outline' mr={3} onClick={openCart}>
+                                Cancel
+                            </Button>
+                            <Button colorScheme='blue' onClick={() => { submitCheckout() }}>Checkout</Button>
+                        </Box>
+                    ) : (
+                        <Box>
+                            <Text>You must be <Link as={RouteLink} to='/login' color='blue'>logged in</Link> to checkout.</Text>
+                        </Box>
+                    )}
+
+
+
                 </DrawerFooter>
             </DrawerContent>
         </Drawer>
