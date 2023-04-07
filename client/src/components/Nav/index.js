@@ -29,6 +29,67 @@ const Nav = () => {
 
     console.log("Logged In: " + Auth.loggedIn())
 
+    const renderNavButtons = () => {
+
+        if (Auth.loggedIn()) {
+
+            return (
+                <UnorderedList display='flex' styleType='none' mr={6}>
+
+                    {/* Logout */}
+                    <ListItem>
+                        <Link
+                            as={RouteLink}
+                            to='/'
+                            onClick={() => Auth.logout()}
+                            px={2}
+                            py={1}
+                            borderRadius={18}
+                            style={{ textDecoration: 'none' }}
+                            _hover={{ fontWeight: 'semibold', backgroundColor: 'primary.600' }}
+                        >
+                            Logout
+                        </Link>
+                    </ListItem>
+                </UnorderedList>
+            )
+        } else {
+
+            // Signup/Login Links
+            return (
+                <UnorderedList display='flex' styleType='none' mr={6}>
+                    <ListItem>
+                        <Link
+                            as={RouteLink}
+                            to='/signup'
+                            px={2}
+                            py={1}
+                            mr={2}
+                            borderRadius={18}
+                            style={{ textDecoration: 'none' }}
+                            _hover={{ fontWeight: 'semibold', backgroundColor: 'primary.600' }}
+                        >
+                            Sign Up
+                        </Link>
+                    </ListItem>
+                    <ListItem>
+                        <Link
+                            as={RouteLink}
+                            to='/login'
+                            px={2}
+                            py={1}
+                            borderRadius={18}
+                            style={{ textDecoration: 'none' }}
+                            _hover={{ fontWeight: 'semibold', backgroundColor: 'primary.600' }}
+                        >
+                            Login
+                        </Link>
+                    </ListItem>
+                </UnorderedList>
+            )
+        }
+    }
+
     return (
         <Flex as='header' w='full' bg='primary.700' px={4} py={2} color='primary.100' justifyContent='space-between'>
 
@@ -49,36 +110,9 @@ const Nav = () => {
 
             {/* Navigation */}
             <Flex as="nav" alignItems='center'>
-                {/* Add render nav function here */}
-                <UnorderedList display='flex' styleType='none' mr={6}>
-                    <ListItem>
-                        <Link 
-                        as={RouteLink}
-                        to='/signup'
-                        px={2}
-                        py={1}
-                        mr={2}
-                        borderRadius={18}
-                        style={{ textDecoration: 'none' }}
-                        _hover={{ fontWeight: 'semibold', backgroundColor: 'primary.600' }}
-                        >
-                            Sign Up
-                        </Link>
-                    </ListItem>
-                    <ListItem>
-                        <Link 
-                        as={RouteLink}
-                        to='/login'
-                        px={2}
-                        py={1}
-                        borderRadius={18}
-                        style={{ textDecoration: 'none' }}
-                        _hover={{ fontWeight: 'semibold', backgroundColor: 'primary.600' }}
-                        >
-                            Login
-                        </Link>
-                    </ListItem>
-                </UnorderedList>
+
+                {/* Renders links based on whether the user is logged in or not */}
+                {renderNavButtons()}
 
                 <IconButton aria-label='Open Cart' icon={< FaShoppingCart />} colorScheme="quaternary" borderRadius='full' onClick={() => { dispatch(toggleCart()) }} />
             </Flex>
