@@ -10,16 +10,44 @@ import {
     FormLabel,
     FormErrorMessage,
     FormHelperText,
-    Input
+    Input,
+    Heading
 } from '@chakra-ui/react';
 import Auth from "../utils/auth";
 
 const Signup = (props) => {
 
     return (
-        <Box>
-            <FormControl>
-                <FormLabel>Email</FormLabel>
+        <Box mx={2}>
+            <FormControl
+                as='form'
+                w={{ base: 'full', md: '50%', lg: '30%' }}
+                bg='white'
+                p={4}
+                mx='auto'
+                my={10}
+                boxShadow='sm'
+            >
+                {/* Heading */}
+                <Heading as='h2' fontSize='2xl' textAlign='center'>Sign Up</Heading>
+
+                {/* First Name */}
+                <FormLabel m={0} mt={4}>First Name:</FormLabel>
+                <Input
+                    type="firstName"
+                    name="firstName"
+                    placeholder='First'
+                    variant='flushed'
+                    size='md'
+                />
+
+                {/* Last Name */}
+
+                {/* Email */}
+
+                {/* Password */}
+
+                {/* Submit Button */}
             </FormControl>
         </Box>
     )
