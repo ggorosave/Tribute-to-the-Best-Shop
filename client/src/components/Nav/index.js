@@ -15,7 +15,7 @@ import { FaShoppingCart } from 'react-icons/fa';
 import { GiPaperBagOpen } from "react-icons/gi";
 import { Link as RouteLink } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
-import { selectCartOpen, toggleCart } from "../../utils/reducers/cartSlice";
+import { toggleCart } from "../../utils/reducers/cartSlice";
 
 const Nav = () => {
 
