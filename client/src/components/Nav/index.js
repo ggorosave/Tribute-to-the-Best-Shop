@@ -36,6 +36,22 @@ const Nav = () => {
             return (
                 <UnorderedList display='flex' styleType='none' mr={6}>
 
+                    {/* Order History */}
+                    <ListItem>
+                        <Link
+                            as={RouteLink}
+                            to='/orderHistory'
+                            px={2}
+                            py={1}
+                            mr={2}
+                            borderRadius={18}
+                            style={{ textDecoration: 'none' }}
+                            _hover={{ fontWeight: 'semibold', backgroundColor: 'primary.600' }}
+                        >
+                            Order History
+                        </Link>
+                    </ListItem>
+
                     {/* Logout */}
                     <ListItem>
                         <Link
