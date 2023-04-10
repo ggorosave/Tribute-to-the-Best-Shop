@@ -15,7 +15,7 @@ import { FaShoppingCart } from 'react-icons/fa';
 import { GiPaperBagOpen } from "react-icons/gi";
 import { Link as RouteLink } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
-import { selectCartOpen, toggleCart } from "../../utils/reducers/cartSlice";
+import { toggleCart } from "../../utils/reducers/cartSlice";
 
 const Nav = () => {
 
@@ -35,6 +35,22 @@ const Nav = () => {
 
             return (
                 <UnorderedList display='flex' styleType='none' mr={6}>
+
+                    {/* Order History */}
+                    <ListItem>
+                        <Link
+                            as={RouteLink}
+                            to='/orderHistory'
+                            px={2}
+                            py={1}
+                            mr={2}
+                            borderRadius={18}
+                            style={{ textDecoration: 'none' }}
+                            _hover={{ fontWeight: 'semibold', backgroundColor: 'primary.600' }}
+                        >
+                            Order History
+                        </Link>
+                    </ListItem>
 
                     {/* Logout */}
                     <ListItem>
