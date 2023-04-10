@@ -7,6 +7,7 @@ import {
     Flex,
     Heading
 } from "@chakra-ui/react";
+import Jumbotron from "../components/Jumbotron";
 
 const Success = () => {
     const [addOrder] = useMutation(ADD_ORDER);
@@ -34,9 +35,14 @@ const Success = () => {
     }, [addOrder]);
 
     return (
-        <Box>
+        <Jumbotron>
 
-        </Box>
+            <Heading as='h2' fontSize='3xl' mb={6}>Success!</Heading>
+
+            <Heading as='h3' fontSize='xl' mb={4}>Thank you for your purchase!</Heading>
+
+            <Heading as='h3' fontSize='xl'>You will now be redirected to the home page.</Heading>
+        </Jumbotron>
     )
 };
 
