@@ -17,7 +17,8 @@ import {
     Button,
     Text,
     Flex,
-    Link
+    Link,
+    useDisclosure
 } from "@chakra-ui/react";
 import { Link as RouteLink } from 'react-router-dom';
 
@@ -27,14 +28,16 @@ import CartItem from "../CartItem";
 
 const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 
-const Cart = () => {
+const Cart = ({ isOpen, onClose }) => {
 
+    // const { isOpen, onOpen, onClose } = useDisclosure();
     const dispatch = useDispatch();
     const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
 
     // Grabs cart from state using a selector (Redux)
     const cart = useSelector(selectCart)
     const cartOpen = useSelector(selectCartOpen);
+
 
 
     // Stripe Checkout
@@ -88,8 +91,10 @@ const Cart = () => {
     return (
         <Drawer
             placement="right"
-            isOpen={cartOpen}
-            onClose={cartOpen}
+            isOpen={isOpen}
+            onClose={onClose}
+            closeOnEsc
+            closeOnOverlayClick
         >
             <DrawerOverlay />
 
@@ -146,7 +151,7 @@ const Cart = () => {
                     {/* TODO: Add auth check to render buttons or error message */}
                     {Auth.loggedIn() ? (
                         <Box>
-                            <Button variant='outline' mr={3} onClick={openCart}>
+                            <Button variant='outline' mr={3} onClick={onClose}>
                                 Cancel
                             </Button>
                             <Button colorScheme='blue' onClick={() => { submitCheckout() }}>Checkout</Button>
