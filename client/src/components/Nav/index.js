@@ -9,13 +9,15 @@ import {
     ListItem,
     Heading,
     IconButton,
-    Icon
+    Icon,
+    useDisclosure
 } from '@chakra-ui/react';
 import { FaShoppingCart } from 'react-icons/fa';
 import { GiPaperBagOpen } from "react-icons/gi";
 import { Link as RouteLink } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { toggleCart } from "../../utils/reducers/cartSlice";
+import Cart from "../Cart";
 
 const Nav = () => {
 
@@ -26,6 +28,8 @@ const Nav = () => {
     // Signup
     // Login
     const dispatch = useDispatch()
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const btnRef = React.useRef()
 
     console.log("Logged In: " + Auth.loggedIn())
 
@@ -107,32 +111,37 @@ const Nav = () => {
     }
 
     return (
-        <Flex as='header' w='full' bg='primary.700' px={4} py={2} color='primary.100' justifyContent='space-between'>
+        <>
+            <Flex as='header' w='full' bg='primary.700' px={4} py={2} color='primary.100' justifyContent='space-between'>
 
-            {/* Store Heading and Homepage Link */}
-            <Heading as='h1' fontSize={{ base: '2xl', md: '3xl' }} >
-                <Link
-                    as={RouteLink}
-                    to="/"
-                    style={{ textDecoration: 'none' }}
-                >
-                    <Flex alignItems='center'>
-                        <Icon as={GiPaperBagOpen} aria-label="shopping-bag" mr={2} />
-                        {/* Tribute to the Best Shop */}
-                        TTB Shop
-                    </Flex>
-                </Link>
-            </Heading>
+                {/* Store Heading and Homepage Link */}
+                <Heading as='h1' fontSize={{ base: '2xl', md: '3xl' }} >
+                    <Link
+                        as={RouteLink}
+                        to="/"
+                        style={{ textDecoration: 'none' }}
+                    >
+                        <Flex alignItems='center'>
+                            <Icon as={GiPaperBagOpen} aria-label="shopping-bag" mr={2} />
+                            {/* Tribute to the Best Shop */}
+                            TTB Shop
+                        </Flex>
+                    </Link>
+                </Heading>
 
-            {/* Navigation */}
-            <Flex as="nav" alignItems='center'>
+                {/* Navigation */}
+                <Flex as="nav" alignItems='center'>
 
-                {/* Renders links based on whether the user is logged in or not */}
-                {renderNavButtons()}
+                    {/* Renders links based on whether the user is logged in or not */}
+                    {renderNavButtons()}
 
-                <IconButton aria-label='Open Cart' icon={< FaShoppingCart />} colorScheme="quaternary" borderRadius='full' onClick={() => { dispatch(toggleCart()) }} />
+                    <IconButton ref={btnRef} aria-label='Open Cart' icon={< FaShoppingCart />} colorScheme="quaternary" borderRadius='full' onClick={onOpen} />
+                </Flex>
             </Flex>
-        </Flex>
+
+            {/* Cart */}
+            <Cart isOpen={isOpen} onClose={onClose} />
+        </>
     )
 
 };

@@ -75,11 +75,7 @@ const OrderHistory = () => {
                     ))}
                 </Box>
 
-            </>) : (<>
-                <Text as='i'>You haven't made any orders yet.</Text>
-            </>)}
-
-
+            </>) : (<></>)}
 
         </Box>
     )
