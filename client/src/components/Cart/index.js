@@ -79,6 +79,8 @@ const Cart = ({ isOpen, onClose }) => {
             }
         });
 
+        console.log(productIds)
+
         getCheckout({
             variables: { products: productIds },
         })
@@ -99,7 +101,7 @@ const Cart = ({ isOpen, onClose }) => {
             <DrawerOverlay />
 
             <DrawerContent>
-                <DrawerCloseButton onClick={openCart} />
+                <DrawerCloseButton onClick={onClose} />
                 <DrawerHeader>Shopping Cart</DrawerHeader>
 
                 <DrawerBody>
@@ -139,7 +141,7 @@ const Cart = ({ isOpen, onClose }) => {
                         </Box>
 
                         {/* Total */}
-                        <Text textAlign='end'>
+                        <Text textAlign='end' mt={2}>
                             <Text as='b'>Total: </Text>${calculateTotal()}
                         </Text>
 
@@ -154,7 +156,7 @@ const Cart = ({ isOpen, onClose }) => {
                             <Button variant='outline' mr={3} onClick={onClose}>
                                 Cancel
                             </Button>
-                            <Button colorScheme='blue' onClick={() => { submitCheckout() }}>Checkout</Button>
+                            <Button colorScheme='blue' onClick={submitCheckout}>Checkout</Button>
                         </Box>
                     ) : (
                         <Box>
