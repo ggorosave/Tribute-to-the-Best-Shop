@@ -17,6 +17,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Success from "./pages/Success";
 import OrderHistory from "./pages/OrderHistory";
+import Detail from "./pages/Detail";
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -64,6 +65,10 @@ const App = () => {
         {
           path: '/orderHistory',
           element: <OrderHistory />
+        },
+        {
+          path: '/products/:id',
+          element: <Detail />
         }
       ],
     }
