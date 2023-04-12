@@ -25,15 +25,12 @@ const ProductItem = (item) => {
     const cart = useSelector(selectCart);
     const dispatch = useDispatch();
 
-    const checkCartAndAdd = () => {
+    const addCartItem = () => {
 
         const itemInCart = cart.find((cartItem) => cartItem._id === _id);
 
         if (itemInCart) {
-            dispatch(updateCartQuantity({
-                _id: _id,
-                purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1
-            }));
+            dispatch(updateCartQuantity(_id, parseInt(itemInCart.purchaseQuantity) + 1));
             idbPromise('cart', 'put', {
                 ...itemInCart,
                 purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1
@@ -86,7 +83,7 @@ const ProductItem = (item) => {
                     </Box>
 
                     <Button
-                        onClick={checkCartAndAdd}
+                        onClick={addCartItem}
                         colorScheme="yellow"
                     >
                         Add to Cart
