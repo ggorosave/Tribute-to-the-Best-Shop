@@ -49,6 +49,23 @@ const Detail = () => {
         }
     }, [products, data, loading, dispatch, id]);
 
+    const addToCart = () => {
+        const itemInCart = cart.find((cartItem) => cartItem._id === id);
+
+        if (itemInCart) {
+
+            dispatch(updateCartQuantity(id, parseInt(itemInCart.purchaseQuantity) + 1));
+
+            idbPromise('cart', 'put', {
+                ...itemInCart,
+                purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1,
+            });
+        } else {
+            dispatch(addToCart({ ...currentProduct, purchaseQuantity: 1 }))
+            idbPromise('cart', 'put', { ...currentProduct, purchaseQuantity: 1 });
+        }
+    };
+
     return (
         <Box>
 
