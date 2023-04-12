@@ -10,7 +10,10 @@ import spinner from '../assets/spinner.gif'
 import {
     Box,
     Flex,
-    Text
+    Text,
+    Heading,
+    Button,
+    Image
 } from "@chakra-ui/react";
 
 const Detail = () => {
@@ -72,9 +75,45 @@ const Detail = () => {
     };
 
     return (
-        <Box>
+        <>
+            {currentProduct && cart ? (
+                <Box my={1}>
 
-        </Box>
+                    {/* Product Name */}
+                    <Heading as='h2' fontSize='2xl'>{currentProduct.name}</Heading>
+
+                    {/* Description */}
+                    <Text>{currentProduct.description}</Text>
+
+                    <Text>
+                        <Text as='b'>Price: </Text>${currentProduct.price}
+                    </Text>
+
+                    <Button
+                        onClick={addToCart}
+                        colorScheme='yellow'
+                    >Add to Cart</Button>
+
+                    <Button
+                        disabled={!cart.find((p) => p._id === currentProduct._id)}
+                        onClick={removeFromCart}
+                        colorScheme="red"
+                    >
+
+                        <Image 
+                            src={`/images/${currentProduct.image}`}
+                            alt={currentProduct.name}
+                        />
+                        Remove from Cart
+                    </Button>
+
+
+                </Box>
+            ) : null }
+
+            {loading ? <Image src={spinner} alt='loading' /> : null}
+
+        </>
     )
 };
 
