@@ -66,6 +66,11 @@ const Detail = () => {
         }
     };
 
+    const removeFromCart = () => {
+        dispatch(removeFromCart(currentProduct._id));
+        idbPromise('cart', 'delete', { ...currentProduct });
+    };
+
     return (
         <Box>
 
