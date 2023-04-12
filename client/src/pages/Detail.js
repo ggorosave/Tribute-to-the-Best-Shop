@@ -52,11 +52,10 @@ const Detail = () => {
         }
     }, [products, data, loading, dispatch, id]);
 
-    const addToCart = () => {
+    const addCartItem = () => {
         const itemInCart = cart.find((cartItem) => cartItem._id === id);
-
+        
         if (itemInCart) {
-
             dispatch(updateCartQuantity(id, parseInt(itemInCart.purchaseQuantity) + 1));
 
             idbPromise('cart', 'put', {
@@ -69,7 +68,7 @@ const Detail = () => {
         }
     };
 
-    const removeFromCart = () => {
+    const removeCartItem = () => {
         dispatch(removeFromCart(currentProduct._id));
         idbPromise('cart', 'delete', { ...currentProduct });
     };
@@ -77,39 +76,65 @@ const Detail = () => {
     return (
         <>
             {currentProduct && cart ? (
-                <Box my={1}>
+                <Flex m={4} flexDirection={{base: 'column', md: 'row'}}>
 
-                    {/* Product Name */}
-                    <Heading as='h2' fontSize='2xl'>{currentProduct.name}</Heading>
+                    {/* Product Image */}
+                    <Image
+                        src={`/images/${currentProduct.image}`}
+                        alt={currentProduct.name}
+                        w={{md: '50%'}}
+                        mb={{base: 8, md: 0}}
+                    />
 
-                    {/* Description */}
-                    <Text>{currentProduct.description}</Text>
-
-                    <Text>
-                        <Text as='b'>Price: </Text>${currentProduct.price}
-                    </Text>
-
-                    <Button
-                        onClick={addToCart}
-                        colorScheme='yellow'
-                    >Add to Cart</Button>
-
-                    <Button
-                        disabled={!cart.find((p) => p._id === currentProduct._id)}
-                        onClick={removeFromCart}
-                        colorScheme="red"
+                    <Flex 
+                        flexDir='column'
+                        mx={{base: 0, md: 4}}
+                        mb={{base: 8, md: 0}}
                     >
 
-                        <Image 
-                            src={`/images/${currentProduct.image}`}
-                            alt={currentProduct.name}
-                        />
-                        Remove from Cart
-                    </Button>
+                        {/* Product Name */}
+                        <Heading as='h2' fontSize='2xl' mb={4}>{currentProduct.name}</Heading>
 
+                        {/* Description */}
+                        <Text>{currentProduct.description}</Text>
 
-                </Box>
-            ) : null }
+                    </Flex>
+
+                    <Flex 
+                        flexDir='column'
+                        alignItems='end'
+                    >
+
+                        {/* Price */}
+                        <Text mb={4} fontSize='lg'>
+                            <Text as='b'>Price: </Text>${currentProduct.price}
+                        </Text>
+
+                        {/* Buttons */}
+                        <Button
+                            onClick={addCartItem}
+                            colorScheme='yellow'
+                            mb={2}
+                            size='sm'
+                            borderRadius='full'
+                            w='full'
+                        >Add to Cart</Button>
+
+                        <Button
+                            disabled={!cart.find((p) => p._id === currentProduct._id)}
+                            onClick={removeCartItem}
+                            colorScheme="red"
+                            size='sm'
+                            borderRadius='full'
+                            w='full'
+                        >
+                            Remove from Cart
+                        </Button>
+
+                    </Flex>
+
+                </Flex>
+            ) : null}
 
             {loading ? <Image src={spinner} alt='loading' /> : null}
 
