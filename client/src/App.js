@@ -18,6 +18,7 @@ import Signup from "./pages/Signup";
 import Success from "./pages/Success";
 import OrderHistory from "./pages/OrderHistory";
 import Detail from "./pages/Detail";
+import NoMatch from "./pages/NoMatch";
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -44,7 +45,7 @@ const App = () => {
     { 
       path: '/',
       element: <Root />,
-      // ADD ErrorPage
+      errorElement: <NoMatch />,
       children: [
         {
           path: '/',

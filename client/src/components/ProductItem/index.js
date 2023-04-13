@@ -41,8 +41,6 @@ const ProductItem = (item) => {
         }
     }
 
-
-
     return (
         <Card w='xs' mr={3} mb={3} borderRadius={0}>
             <CardBody>
