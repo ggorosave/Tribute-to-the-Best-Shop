@@ -36,10 +36,7 @@ const CategoryMenu = () => {
     };
 
     return (
-        <Box mt={2}>
-
-            {/* Heading */}
-            <Heading as='h2' fontSize='xl'>Choose a Category:</Heading>
+        <Box w='full' bg='primary.500' pl={2}>
 
             {/* Category Buttons */}
             {categories.map((item) => (
@@ -48,10 +45,9 @@ const CategoryMenu = () => {
                     onClick={() => {
                         handleClick(item._id);
                     }}
-                    colorScheme="yellow"
-                    mr={2}
-                    mt={2}
-                    borderRadius={20}
+                    colorScheme="primary"
+                    // mr={2}
+                    borderRadius={0}
                     size='sm'
                 >
                     {item.name}

@@ -5,7 +5,7 @@ import ProductList from "../components/ProductList";
 
 const Home = () => {
     return(
-        <Box mx={4}>
+        <Box>
     
             <CategoryMenu />
             <ProductList />
