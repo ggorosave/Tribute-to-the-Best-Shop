@@ -4,6 +4,8 @@ import CategoryMenu from "../components/CategoryMenu";
 import ProductList from "../components/ProductList";
 
 const Home = () => {
+
+    console.log(window.screen.width)
     return(
         <Box>
     

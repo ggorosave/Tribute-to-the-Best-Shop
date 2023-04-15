@@ -1,10 +1,20 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useQuery } from "@apollo/client";
 import { useSelector, useDispatch } from "react-redux";
 import { QUERY_CATEGORIES } from "../../utils/queries";
 import { idbPromise } from "../../utils/helpers";
 import { selectCategories, updateCategories, updateCurrentCategory } from "../../utils/reducers/categorySlice";
-import { Box, Heading, Button } from "@chakra-ui/react";
+import {
+    Box,
+    Heading,
+    Button,
+    Menu,
+    MenuButton,
+    MenuList,
+    MenuItem,
+} from "@chakra-ui/react";
+import { BiMenu } from "react-icons/bi";
+import MenuIconButton from "../MenuIconButton";
 
 const CategoryMenu = () => {
 
@@ -14,10 +24,20 @@ const CategoryMenu = () => {
 
     const { loading, data: categoryData } = useQuery(QUERY_CATEGORIES);
 
+    const smallScreen = window.screen.width <= 600;
+
+    const menuButtonRef = useRef(null);
+
+    const handleMenuClick = () => {
+        if (menuButtonRef.current) {
+            menuButtonRef.current.click();
+        }
+    }
+
     useEffect(() => {
 
         if (categoryData) {
-            
+
             // Category Reducer
             dispatch(updateCategories(categoryData.categories));
 
@@ -38,21 +58,50 @@ const CategoryMenu = () => {
     return (
         <Box w='full' bg='primary.500' pl={2}>
 
-            {/* Category Buttons */}
-            {categories.map((item) => (
-                <Button
-                    key={item._id}
-                    onClick={() => {
-                        handleClick(item._id);
-                    }}
-                    colorScheme="primary"
-                    // mr={2}
-                    borderRadius={0}
-                    size='sm'
-                >
-                    {item.name}
-                </Button>
-            ))}
+            {/* Checks if screen size is small */}
+            {smallScreen ? (
+                // category menu renders as hamburger menu
+                <Menu>
+
+                    <MenuButton
+                        as={MenuIconButton}
+                        onClick={handleMenuClick}
+                    />
+
+                    <MenuList>
+
+                        {/* Category Menu */}
+                        {categories.map((item) => (
+                            <MenuItem
+                                key={item._id}
+                                onClick={() => {
+                                    handleClick(item._id);
+                                }}
+                            >{item.name}</MenuItem>
+                        ))}
+                    </MenuList>
+
+                </Menu>
+            ) : (
+                // category menu renders as bar with buttons if screen is not small
+                <>
+                    {/* Category Buttons */}
+                    {categories.map((item) => (
+                        <Button
+                            key={item._id}
+                            onClick={() => {
+                                handleClick(item._id);
+                            }}
+                            colorScheme="primary"
+                            // mr={2}
+                            borderRadius={0}
+                            size='sm'
+                        >
+                            {item.name}
+                        </Button>
+                    ))}
+                </>
+            )}
         </Box>
     )
 };
