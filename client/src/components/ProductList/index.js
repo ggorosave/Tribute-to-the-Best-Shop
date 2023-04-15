@@ -53,8 +53,6 @@ const ProductList = () => {
     return (
         <Box mt={2}>
 
-            <Heading as="h2" fontSize='xl'>Our Products:</Heading>
-
             {/* Products */}
             {products.length ? (
                 <Flex flexWrap='wrap' justifyContent='center' mt={2}>

@@ -56,6 +56,7 @@ const CategoryMenu = () => {
 
                     <MenuButton
                         as={MenuIconButton}
+                        colorScheme='primary'
                     />
 
                     <MenuList>
