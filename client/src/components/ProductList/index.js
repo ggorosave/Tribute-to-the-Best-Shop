@@ -16,6 +16,8 @@ import ProductItem from "../ProductItem";
 
 const ProductList = () => {
 
+    
+
     // Grabs current category from state using a selector (Redux)
     const currentCategory = useSelector(selectCurrentCategory);
     // Grabs products from state using a selector (Redux)
@@ -50,8 +52,6 @@ const ProductList = () => {
 
     return (
         <Box mt={2}>
-
-            <Heading as="h2" fontSize='xl'>Our Products:</Heading>
 
             {/* Products */}
             {products.length ? (
