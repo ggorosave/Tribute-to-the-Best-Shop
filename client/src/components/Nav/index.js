@@ -10,102 +10,177 @@ import {
     Heading,
     IconButton,
     Icon,
-    useDisclosure
+    useDisclosure,
+    MenuButton,
+    MenuList,
+    MenuItem,
+    Menu,
 } from '@chakra-ui/react';
 import { FaShoppingCart } from 'react-icons/fa';
 import { GiPaperBagOpen } from "react-icons/gi";
 import { Link as RouteLink } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
-import { toggleCart } from "../../utils/reducers/cartSlice";
 import Cart from "../Cart";
+import MenuIconButton from "../MenuIconButton";
+
 
 const Nav = () => {
 
-    // Add function to render navigation based on login status 
-    // Order History
-    // Logout
-    // ------------
-    // Signup
-    // Login
     const dispatch = useDispatch()
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const btnRef = React.useRef()
+    const btnRef = React.useRef();
+    const smallScreen = window.screen.width <= 600;
 
     console.log("Logged In: " + Auth.loggedIn())
 
     const renderNavButtons = () => {
 
+        // Conditionally renders buttons based on logged in status
         if (Auth.loggedIn()) {
 
             return (
-                <UnorderedList display='flex' styleType='none' mr={6}>
+                <>
+                    {/* Conditionally renders menu base on screen size */}
+                    {smallScreen ? (
+                        <>
+                            <Menu>
+                                <MenuButton
+                                    as={MenuIconButton}
+                                    _active={{ backgroundColor: 'primary.600' }}
+                                    _hover={{ backgroundColor: 'primary.700' }}
+                                    bg='primary.700'
+                                />
 
-                    {/* Order History */}
-                    <ListItem>
-                        <Link
-                            as={RouteLink}
-                            to='/orderHistory'
-                            px={2}
-                            py={1}
-                            mr={2}
-                            borderRadius={18}
-                            style={{ textDecoration: 'none' }}
-                            _hover={{ fontWeight: 'semibold', backgroundColor: 'primary.600' }}
-                        >
-                            Order History
-                        </Link>
-                    </ListItem>
+                                <MenuList bg='primary.600'>
+                                    <MenuItem
+                                        as={RouteLink}
+                                        to='/orderHistory'
+                                        bg='primary.600'
+                                    >
+                                        Order History
+                                    </MenuItem>
+                                    <MenuItem
+                                        as={RouteLink}
+                                        to='/'
+                                        onClick={() => Auth.logout()}
+                                        bg='primary.600'
+                                    >
+                                        Logout
+                                    </MenuItem>
+                                </MenuList>
 
-                    {/* Logout */}
-                    <ListItem>
-                        <Link
-                            as={RouteLink}
-                            to='/'
-                            onClick={() => Auth.logout()}
-                            px={2}
-                            py={1}
-                            borderRadius={18}
-                            style={{ textDecoration: 'none' }}
-                            _hover={{ fontWeight: 'semibold', backgroundColor: 'primary.600' }}
-                        >
-                            Logout
-                        </Link>
-                    </ListItem>
-                </UnorderedList>
+                            </Menu>
+                        </>
+                    ) : (
+                        <>
+                            <UnorderedList display='flex' styleType='none' mr={6}>
+
+                                {/* Order History */}
+                                <ListItem>
+                                    <Link
+                                        as={RouteLink}
+                                        to='/orderHistory'
+                                        px={2}
+                                        py={1}
+                                        mr={2}
+                                        borderRadius={18}
+                                        style={{ textDecoration: 'none' }}
+                                        _hover={{ fontWeight: 'semibold', backgroundColor: 'primary.600' }}
+                                    >
+                                        Order History
+                                    </Link>
+                                </ListItem>
+
+                                {/* Logout */}
+                                <ListItem>
+                                    <Link
+                                        as={RouteLink}
+                                        to='/'
+                                        onClick={() => Auth.logout()}
+                                        px={2}
+                                        py={1}
+                                        borderRadius={18}
+                                        style={{ textDecoration: 'none' }}
+                                        _hover={{ fontWeight: 'semibold', backgroundColor: 'primary.600' }}
+                                    >
+                                        Logout
+                                    </Link>
+                                </ListItem>
+                            </UnorderedList>
+                        </>
+                    )}
+                </>
             )
         } else {
 
             // Signup/Login Links
             return (
-                <UnorderedList display='flex' styleType='none' mr={6}>
-                    <ListItem>
-                        <Link
-                            as={RouteLink}
-                            to='/signup'
-                            px={2}
-                            py={1}
-                            mr={2}
-                            borderRadius={18}
-                            style={{ textDecoration: 'none' }}
-                            _hover={{ fontWeight: 'semibold', backgroundColor: 'primary.600' }}
-                        >
-                            Sign Up
-                        </Link>
-                    </ListItem>
-                    <ListItem>
-                        <Link
-                            as={RouteLink}
-                            to='/login'
-                            px={2}
-                            py={1}
-                            borderRadius={18}
-                            style={{ textDecoration: 'none' }}
-                            _hover={{ fontWeight: 'semibold', backgroundColor: 'primary.600' }}
-                        >
-                            Login
-                        </Link>
-                    </ListItem>
-                </UnorderedList>
+                <>
+                    {smallScreen ? (
+                        <>
+                            <Menu>
+                                <MenuButton
+                                    as={MenuIconButton}
+                                    bg='primary.700'
+                                    borderRadius='full'
+                                    _active={{ backgroundColor: 'primary.600' }}
+                                    _hover={{ backgroundColor: 'primary.700' }}
+                                />
+
+                                <MenuList bg='primary.600'>
+                                    <MenuItem
+                                        as={RouteLink}
+                                        to='/signup'
+                                        bg='primary.600'
+                                    >
+                                        Signup
+                                    </MenuItem>
+                                    <MenuItem
+                                        as={RouteLink}
+                                        to='/login'
+                                        bg='primary.600'
+                                    >
+                                        Login
+                                    </MenuItem>
+                                </MenuList>
+
+                            </Menu>
+                        </>
+                    ) : (
+                        <>
+                            <UnorderedList display='flex' styleType='none' mr={6}>
+                                <ListItem>
+                                    <Link
+                                        as={RouteLink}
+                                        to='/signup'
+                                        px={2}
+                                        py={1}
+                                        mr={2}
+                                        borderRadius={18}
+                                        style={{ textDecoration: 'none' }}
+                                        _hover={{ fontWeight: 'semibold', backgroundColor: 'primary.600' }}
+                                    >
+                                        Sign Up
+                                    </Link>
+                                </ListItem>
+                                <ListItem>
+                                    <Link
+                                        as={RouteLink}
+                                        to='/login'
+                                        px={2}
+                                        py={1}
+                                        borderRadius={18}
+                                        style={{ textDecoration: 'none' }}
+                                        _hover={{ fontWeight: 'semibold', backgroundColor: 'primary.600' }}
+                                    >
+                                        Login
+                                    </Link>
+                                </ListItem>
+                            </UnorderedList>
+                        </>
+                    )}
+
+                </>
             )
         }
     }

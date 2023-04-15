@@ -13,7 +13,6 @@ import {
     MenuList,
     MenuItem,
 } from "@chakra-ui/react";
-import { BiMenu } from "react-icons/bi";
 import MenuIconButton from "../MenuIconButton";
 
 const CategoryMenu = () => {
@@ -24,15 +23,7 @@ const CategoryMenu = () => {
 
     const { loading, data: categoryData } = useQuery(QUERY_CATEGORIES);
 
-    const smallScreen = window.screen.width <= 600;
-
-    const menuButtonRef = useRef(null);
-
-    const handleMenuClick = () => {
-        if (menuButtonRef.current) {
-            menuButtonRef.current.click();
-        }
-    }
+    const smallScreen = window.screen.width <= 600;  
 
     useEffect(() => {
 
@@ -65,7 +56,6 @@ const CategoryMenu = () => {
 
                     <MenuButton
                         as={MenuIconButton}
-                        onClick={handleMenuClick}
                     />
 
                     <MenuList>

@@ -9,7 +9,7 @@ const MenuIconButton = React.forwardRef((props, ref) => {
             ref={ref}
             icon={<BiMenu />}
             {...props}
-            colorScheme="primary"
+            // colorScheme="primary"
             borderRadius={0}
         />
     )
