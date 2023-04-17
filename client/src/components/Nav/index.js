@@ -46,16 +46,17 @@ const Nav = () => {
                             <Menu>
                                 <MenuButton
                                     as={MenuIconButton}
-                                    _active={{ backgroundColor: 'primary.600' }}
-                                    _hover={{ backgroundColor: 'primary.700' }}
-                                    bg='primary.700'
+                                    _active={{ backgroundColor: 'secondary.600' }}
+                                    _hover={{ backgroundColor: 'secondary.700' }}
+                                    bg='secondary.700'
+                                    mr={1}
                                 />
 
-                                <MenuList bg='primary.600'>
+                                <MenuList bg='secondary.400'>
                                     <MenuItem
                                         as={RouteLink}
                                         to='/orderHistory'
-                                        bg='primary.600'
+                                        bg='secondary.400'
                                     >
                                         Order History
                                     </MenuItem>
@@ -63,7 +64,7 @@ const Nav = () => {
                                         as={RouteLink}
                                         to='/'
                                         onClick={() => Auth.logout()}
-                                        bg='primary.600'
+                                        bg='secondary.400'
                                     >
                                         Logout
                                     </MenuItem>
@@ -85,7 +86,7 @@ const Nav = () => {
                                         mr={2}
                                         borderRadius={18}
                                         style={{ textDecoration: 'none' }}
-                                        _hover={{ fontWeight: 'semibold', backgroundColor: 'primary.600' }}
+                                        _hover={{ fontWeight: 'semibold', backgroundColor: 'secondary.600' }}
                                     >
                                         Order History
                                     </Link>
@@ -101,7 +102,7 @@ const Nav = () => {
                                         py={1}
                                         borderRadius={18}
                                         style={{ textDecoration: 'none' }}
-                                        _hover={{ fontWeight: 'semibold', backgroundColor: 'primary.600' }}
+                                        _hover={{ fontWeight: 'semibold', backgroundColor: 'secondary.600' }}
                                     >
                                         Logout
                                     </Link>
@@ -118,27 +119,28 @@ const Nav = () => {
                 <>
                     {smallScreen ? (
                         <>
-                            <Menu>
+                            <Menu mr={2}>
                                 <MenuButton
                                     as={MenuIconButton}
-                                    bg='primary.700'
+                                    bg='secondary.700'
                                     borderRadius='full'
-                                    _active={{ backgroundColor: 'primary.600' }}
-                                    _hover={{ backgroundColor: 'primary.700' }}
+                                    _active={{ backgroundColor: 'secondary.600' }}
+                                    _hover={{ backgroundColor: 'secondary.700' }}
+                                    mr={1}
                                 />
 
-                                <MenuList bg='primary.600'>
+                                <MenuList bg='secondary.400'>
                                     <MenuItem
                                         as={RouteLink}
                                         to='/signup'
-                                        bg='primary.600'
+                                        bg='secondary.400'
                                     >
                                         Signup
                                     </MenuItem>
                                     <MenuItem
                                         as={RouteLink}
                                         to='/login'
-                                        bg='primary.600'
+                                        bg='secondary.400'
                                     >
                                         Login
                                     </MenuItem>
@@ -158,7 +160,7 @@ const Nav = () => {
                                         mr={2}
                                         borderRadius={18}
                                         style={{ textDecoration: 'none' }}
-                                        _hover={{ fontWeight: 'semibold', backgroundColor: 'primary.600' }}
+                                        _hover={{ fontWeight: 'semibold', backgroundColor: 'secondary.600' }}
                                     >
                                         Sign Up
                                     </Link>
@@ -171,7 +173,7 @@ const Nav = () => {
                                         py={1}
                                         borderRadius={18}
                                         style={{ textDecoration: 'none' }}
-                                        _hover={{ fontWeight: 'semibold', backgroundColor: 'primary.600' }}
+                                        _hover={{ fontWeight: 'semibold', backgroundColor: 'secondary.600' }}
                                     >
                                         Login
                                     </Link>
@@ -187,7 +189,7 @@ const Nav = () => {
 
     return (
         <>
-            <Flex as='header' w='full' bg='primary.700' px={4} py={2} color='primary.100' justifyContent='space-between'>
+            <Flex as='header' w='full' bg='secondary.700' px={4} py={2} color='primary.100' justifyContent='space-between'>
 
                 {/* Store Heading and Homepage Link */}
                 <Heading as='h1' fontSize={{ base: '2xl', md: '3xl' }} >
@@ -199,7 +201,7 @@ const Nav = () => {
                         <Flex alignItems='center'>
                             <Icon as={GiPaperBagOpen} aria-label="shopping-bag" mr={2} />
                             {/* Tribute to the Best Shop */}
-                            TTB Shop
+                            Tribute Shop
                         </Flex>
                     </Link>
                 </Heading>
