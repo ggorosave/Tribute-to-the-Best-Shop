@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link as RouteLink, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromCart, updateCartQuantity, addToCart, selectCart } from "../utils/reducers/cartSlice";
@@ -8,7 +8,6 @@ import { QUERY_PRODUCTS } from "../utils/queries";
 import { idbPromise } from "../utils/helpers";
 import spinner from '../assets/spinner.gif'
 import {
-    Box,
     Flex,
     Text,
     Heading,

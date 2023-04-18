@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import { useSelector, useDispatch } from "react-redux";
 import { QUERY_CATEGORIES } from "../../utils/queries";
@@ -6,7 +6,6 @@ import { idbPromise } from "../../utils/helpers";
 import { selectCategories, updateCategories, updateCurrentCategory } from "../../utils/reducers/categorySlice";
 import {
     Box,
-    Heading,
     Button,
     Menu,
     MenuButton,

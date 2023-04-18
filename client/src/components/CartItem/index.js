@@ -1,11 +1,8 @@
-import { useSelector, useDispatch } from "react-redux";
-import { removeFromCart, selectCart, updateCartQuantity } from "../../utils/reducers/cartSlice";
+import { useDispatch } from "react-redux";
+import { removeFromCart, updateCartQuantity } from "../../utils/reducers/cartSlice";
 import { idbPromise } from "../../utils/helpers";
 import {
     Card,
-    CardHeader,
-    CardBody,
-    CardFooter,
     Image,
     Input,
     Flex,
