@@ -3,7 +3,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import { useLazyQuery } from "@apollo/client";
 import { QUERY_CHECKOUT } from "../../utils/queries";
 import { useSelector, useDispatch } from "react-redux";
-import { selectCart, selectCartOpen, toggleCart, addMultipleToCart } from "../../utils/reducers/cartSlice";
+import { selectCart, selectCartCount, toggleCart, addMultipleToCart } from "../../utils/reducers/cartSlice";
 import { idbPromise } from '../../utils/helpers';
 import {
     Box,
@@ -33,7 +33,10 @@ const Cart = ({ isOpen, onClose }) => {
     const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
 
     // Grabs cart from state using a selector (Redux)
-    const cart = useSelector(selectCart)
+    const cart = useSelector(selectCart);
+    const cartCount = useSelector(selectCartCount);
+
+    console.log("Cart Count: " + cartCount)
 
     // Stripe Checkout
     useEffect(() => {
