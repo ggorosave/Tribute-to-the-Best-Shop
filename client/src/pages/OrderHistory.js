@@ -24,8 +24,6 @@ const OrderHistory = () => {
         user = data.user;
     }
 
-    console.log(user)
-
     const sendHome = () => {
         window.location.assign('/');
     }

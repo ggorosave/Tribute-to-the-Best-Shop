@@ -3,8 +3,6 @@ import { useMutation } from "@apollo/client";
 import { ADD_ORDER } from "../utils/mutations";
 import { idbPromise } from "../utils/helpers";
 import {
-    Box,
-    Flex,
     Heading
 } from "@chakra-ui/react";
 import Jumbotron from "../components/Jumbotron";

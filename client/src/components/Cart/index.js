@@ -18,7 +18,6 @@ import {
     Text,
     Flex,
     Link,
-    useDisclosure
 } from "@chakra-ui/react";
 import { Link as RouteLink } from 'react-router-dom';
 
@@ -30,15 +29,11 @@ const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 
 const Cart = ({ isOpen, onClose }) => {
 
-    // const { isOpen, onOpen, onClose } = useDisclosure();
     const dispatch = useDispatch();
     const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
 
     // Grabs cart from state using a selector (Redux)
     const cart = useSelector(selectCart)
-    const cartOpen = useSelector(selectCartOpen);
-
-
 
     // Stripe Checkout
     useEffect(() => {

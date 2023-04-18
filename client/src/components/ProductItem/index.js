@@ -7,13 +7,11 @@ import {
     Link,
     Button,
     Card,
-    CardHeader,
     CardBody,
     CardFooter,
     Image,
     Text,
     Flex,
-    Spacer
 } from "@chakra-ui/react";
 
 const ProductItem = (item) => {

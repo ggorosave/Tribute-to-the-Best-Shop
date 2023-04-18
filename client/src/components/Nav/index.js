@@ -1,9 +1,7 @@
 import React from "react";
 import Auth from "../../utils/auth";
 import {
-    Box,
     Flex,
-    Text,
     Link,
     UnorderedList,
     ListItem,
@@ -19,19 +17,15 @@ import {
 import { FaShoppingCart } from 'react-icons/fa';
 import { GiPaperBagOpen } from "react-icons/gi";
 import { Link as RouteLink } from 'react-router-dom';
-import { useDispatch, useSelector } from "react-redux";
 import Cart from "../Cart";
 import MenuIconButton from "../MenuIconButton";
 
 
 const Nav = () => {
 
-    const dispatch = useDispatch()
     const { isOpen, onOpen, onClose } = useDisclosure();
     const btnRef = React.useRef();
     const smallScreen = window.screen.width <= 600;
-
-    console.log("Logged In: " + Auth.loggedIn())
 
     const renderNavButtons = () => {
 
