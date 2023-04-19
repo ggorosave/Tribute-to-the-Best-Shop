@@ -3,7 +3,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import { useLazyQuery } from "@apollo/client";
 import { QUERY_CHECKOUT } from "../../utils/queries";
 import { useSelector, useDispatch } from "react-redux";
-import { selectCart, selectCartCount, toggleCart, addMultipleToCart } from "../../utils/reducers/cartSlice";
+import { selectCart, addMultipleToCart } from "../../utils/reducers/cartSlice";
 import { idbPromise } from '../../utils/helpers';
 import {
     Box,
