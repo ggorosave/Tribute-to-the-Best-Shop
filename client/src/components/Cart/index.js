@@ -34,9 +34,6 @@ const Cart = ({ isOpen, onClose }) => {
 
     // Grabs cart from state using a selector (Redux)
     const cart = useSelector(selectCart);
-    const cartCount = useSelector(selectCartCount);
-
-    console.log("Cart Count: " + cartCount)
 
     // Stripe Checkout
     useEffect(() => {
@@ -82,10 +79,6 @@ const Cart = ({ isOpen, onClose }) => {
         getCheckout({
             variables: { products: productIds },
         })
-    }
-
-    const openCart = () => {
-        dispatch(toggleCart())
     }
 
     return (
