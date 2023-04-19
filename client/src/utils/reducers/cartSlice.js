@@ -4,19 +4,25 @@ export const cartSlice = createSlice({
     name: 'cart',
     initialState: {
         cart: [],
-        cartOpen: false,
+        cartCount: 0,
     },
     reducers: {
         addToCart: (state, action) => {
-            state.cartOpen = true;
+            state.cartCount += 1;
             state.cart.push(action.payload);
         },
         addMultipleToCart: (state, action) => {
-            state.cart = [...action.payload];
+            let newState = [...action.payload];
+
+            const updatedCount = newState.reduce((total, item) => {
+                return total + item.purchaseQuantity;
+            }, 0);
+
+            state.cart = [...newState];
+            state.cartCount = updatedCount;
         },
         updateCartQuantity: {
             reducer(state, action) {
-                state.cartOpen = true;
                 let newState = state.cart.map((product) => {
                     if (action.payload._id === product._id) {
                         // REFACTOR?
@@ -25,7 +31,12 @@ export const cartSlice = createSlice({
                     return product;
                 });
 
+                const updatedCount = newState.reduce((total, item) => {
+                    return total + item.purchaseQuantity;
+                }, 0)
+
                 state.cart = [...newState];
+                state.cartCount = updatedCount;
             },
             prepare(_id, purchaseQuantity) {
                 return {
@@ -41,22 +52,23 @@ export const cartSlice = createSlice({
                 return product._id !== action.payload
             })
 
-            state.cartOpen = newState.length > 0;
+            const updatedCount = newState.reduce((total, item) => {
+                return total + item.purchaseQuantity;
+            }, 0);
+
             state.cart = [...newState];
+            state.cartCount = updatedCount;
         },
         clearCart: (state) => {
-            state.cartOpen = false;
+            state.cartCount = 0;
             state.cart = [];
         },
-        toggleCart: (state) => {
-            state.cartOpen = !state.cartOpen;
-        }
     }
 });
 
 export const { addToCart, addMultipleToCart, updateCartQuantity, removeFromCart, clearCart, toggleCart } = cartSlice.actions;
 
 export const selectCart = state => state.cart.cart;
-export const selectCartOpen = state => state.cart.cartOpen;
+export const selectCartCount = state => state.cart.cartCount;
 
 export default cartSlice.reducer;

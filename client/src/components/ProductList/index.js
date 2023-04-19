@@ -67,7 +67,7 @@ const ProductList = () => {
                     ))}
                 </Flex>
             ) : (
-                <Heading as='h3' fontSize='xl'>You haven't added any products yet!</Heading>
+                <Heading as='h3' fontSize='xl' textAlign='center' mt={16}>You haven't added any products yet!</Heading>
             )
             }
 

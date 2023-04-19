@@ -13,10 +13,14 @@ import {
     MenuList,
     MenuItem,
     Menu,
+    Box,
+    Text
 } from '@chakra-ui/react';
 import { FaShoppingCart } from 'react-icons/fa';
 import { GiPaperBagOpen } from "react-icons/gi";
 import { Link as RouteLink } from 'react-router-dom';
+import { useSelector } from "react-redux";
+import { selectCartCount } from "../../utils/reducers/cartSlice";
 import Cart from "../Cart";
 import MenuIconButton from "../MenuIconButton";
 
@@ -26,6 +30,7 @@ const Nav = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const btnRef = React.useRef();
     const smallScreen = window.screen.width <= 600;
+    const cartCount = useSelector(selectCartCount);
 
     const renderNavButtons = () => {
 
@@ -207,11 +212,16 @@ const Nav = () => {
                     {renderNavButtons()}
 
                     <IconButton ref={btnRef} aria-label='Open Cart' icon={< FaShoppingCart />} colorScheme="quaternary" borderRadius='full' onClick={onOpen} />
+
+                    <Box w='fit-content' bg='yellow.400' px={1} py={0} ml={-3} mt={5} zIndex={1} borderRadius='full'>
+                        <Text color='primary.800' fontSize='2xs' >{cartCount}</Text>
+                    </Box>
                 </Flex>
             </Flex>
 
             {/* Cart */}
             <Cart isOpen={isOpen} onClose={onClose} />
+
         </>
     )
 
