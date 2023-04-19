@@ -11,6 +11,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 // TODO: Look at redux docs to refactor util files: https://redux.js.org/tutorials/quick-start
 // Chakra: https://chakra-ui.com/getting-started
 // React Router: https://reactrouter.com/en/main/start/tutorial
+
 import Root from "./pages/Root";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -60,7 +61,7 @@ const App = () => {
           element: <Signup />
         },
         {
-          path: '/success',
+          path: '/success*',
           element: <Success />
         },
         {
