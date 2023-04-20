@@ -61,7 +61,7 @@ const App = () => {
           element: <Signup />
         },
         {
-          path: '/ordered',
+          path: '/success',
           element: <Success />
         },
         {
