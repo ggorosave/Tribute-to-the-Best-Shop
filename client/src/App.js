@@ -61,7 +61,7 @@ const App = () => {
           element: <Signup />
         },
         {
-          path: '/success*',
+          path: '/success',
           element: <Success />
         },
         {
