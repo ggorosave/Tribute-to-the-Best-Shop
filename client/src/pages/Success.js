@@ -9,7 +9,7 @@ import Jumbotron from "../components/Jumbotron";
 
 const Success = () => {
     const [addOrder] = useMutation(ADD_ORDER);
-    const orderAddedRef = useRef(false);
+    // const orderAddedRef = useRef(false);
 
     useEffect(() => {
         const saveOrder = async () => {
@@ -33,12 +33,12 @@ const Success = () => {
         }
 
         // stops from running a second time if orderAddedRef.current is true
-        if (orderAddedRef.current) {
-            return
-        }
+        // if (orderAddedRef.current) {
+        //     return
+        // }
 
         // Sets orderAddedRef.current to true the first time the useEffect runs
-        orderAddedRef.current = true;
+        // orderAddedRef.current = true;
 
         saveOrder();
     }, [addOrder]);
